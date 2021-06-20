@@ -6,10 +6,11 @@
 
 
 class Register {
-
-private:
-
 public:
+
+	void SignInCode();
+	void SignUpCode();
+	void PickOption();
 
 };
 

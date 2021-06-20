@@ -1,2 +1,5 @@
 ﻿  Bank.cpp
-  Bank.vcxproj -> C:\Users\Fatmir\source\repos\FatmirGusaniWork\Debug\Bank.exe
+  Function.cpp
+  Main.cpp
+C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\Main.cpp(11,2): error C3861: 'PickOption': identifier not found
+  Generating Code...
