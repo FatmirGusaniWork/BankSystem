@@ -14,6 +14,7 @@ void Register::MainMenu()
 	Register r;
 	int option;
 	int balance = 5;
+	int amount;
 
 	r.PrintName();
 
@@ -24,6 +25,9 @@ void Register::MainMenu()
 	switch (option)
 	{
 	case 1:
+		cout << "Enter Withdraw Amount : " << endl;
+		cin >> amount;
+
 		//bank withdrawal
 		break;
 	case 2:
