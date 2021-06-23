@@ -6,98 +6,109 @@ using namespace std;
 #include <iostream>
 #include <sstream>
 #include <stdlib.h>
+#include <windows.h>
 #include "Register.h"
 
-class Function
+
+string fullName;
+string BankPin;
+string checkBankPin;
+string checkFullName;
+int num;
+int tryAgain;
+
+Register r;
+
+void Register::SignUpCode()
 {
-private:
-	string fullName;
-	string BankPin;
-	string checkBankPin;
-	string checkFullName;
-	int num;
+	cout << "*********************************************" << endl;
+	cout << "********************Sign Up******************" << endl;
+
+	cout << "Enter your full name : ";
+	cin >> fullName;
+	cout << "" << endl;
+	cout << "Enter Bank Pin : ";
+	cin >> BankPin;
+
+	cout << "Sign Up completed, BANK PIN : " + BankPin << endl;
+
+	cout << "*********************************************" << endl;
+	cout << "********************Sign Up******************" << endl;
+
+	Sleep(3000);
+
+	system("CLS");
+	r.MainMenu();
+
+}
+
+void Register::SignInCode()
+{
 	int tryAgain;
+	cout << "*********************************************" << endl;
+	cout << "********************Sign In******************" << endl;
 
-public:
+	cout << "Enter your full name : ";
+	cin >> checkFullName;
+	cout << "" << endl;
+
+	cout << "Enter Bank Pin : " << endl;
+	cin >> checkBankPin;
+
+	if (checkFullName == fullName && checkBankPin == BankPin)
+	{
+		system("CLS");
+		r.MainMenu();
+	}
+	else
+	{
+		system("CLS");
+		cout << "SIGN IN FAILED, Try Again" << endl;
+
+		cout << "1 : Try Again\n2 : Sign Up\n3 : EXIT" << endl;
+		cin >> tryAgain;
+		switch (tryAgain)
+		{
+		case 1:
+			SignInCode();
+			break;
+		case 2:
+			SignUpCode();
+			break;
+		case 3:
+			exit(0);
+			break;
+		default:
+			cout << "Wrong Entry" << endl;
+		}
+	}
+	cout << "*********************************************" << endl;
+	cout << "********************Sign In******************" << endl;
+}
+
+void Register::PickOption()
+{
 	Register r;
+	int option;
+	cout << "Wellcome, please pick one of the options available" << endl;
+	cout << "1 : Sign In. \n2 : Sign Up." << endl;
+	cin >> option;
 
-	void SignUpCode()
+	switch (option)
 	{
-		cout << "*********************************************" << endl;
-		cout << "********************Sign Up******************" << endl;
-
-		cout << "Enter your full name : ";
-		cin >> fullName;
-		cout << "" << endl;
-
-		cout << "Enter a pin.\n *NOTE* Don't make the pin easy and don't forget it." << endl;
-
-
-		while (!(cin >> BankPin))
-		{
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "WRONG ENTRY" << endl;
-
-			cout << BankPin;
-		}
-
-		stringstream ss;
-		ss << BankPin;
-		ss >> num;
-
-		cout << BankPin << endl;
-		cout << num << endl;
-
-
-		cout << "Sign Up completed, BANK PIN : " + BankPin << endl;
-
-		cout << "*********************************************" << endl;
-		cout << "********************Sign Up******************" << endl;
+	case 1:
+		r.SignInCode();
+		break;
+	case 2:
+		r.SignUpCode();
+		break;
+	default:
+		cout << "Wrong Entery, Try Again" << endl;
+		PickOption();
 	}
+}
 
-	void SignInCode()
-	{
-		cout << "*********************************************" << endl;
-		cout << "********************Sign In******************" << endl;
-
-		cout << "Enter your full name : ";
-		cin >> checkFullName;
-		cout << "" << endl;
-
-		cout << "Enter Bank Pin : " << endl;
-		for (int i = 0; i < 6; i++)
-		{
-			cin >> checkBankPin;
-			cout << "*";
-		}
-
-		if (checkFullName == fullName && checkBankPin == BankPin)
-		{
-			cout << "WELCOME " + fullName << endl;
-			//Enter Code that bring the user to main screen.
-		}
-		else
-		{
-			cout << "SIGN IN FAILED, Try Again" << endl;
-			cout << "1 : Try Again\n2 : Sign Up\n3 : Home" << endl;
-			switch (tryAgain)
-			{
-			case 1:
-				SignInCode();
-				break;
-			case 2:
-				SignUpCode();
-				break;
-			case 3:
-				r.PickOption();
-				break;
-			default:
-				cout << "Wrong Entry" << endl;
-				
-			}
-		}
-		cout << "*********************************************" << endl;
-		cout << "********************Sign In******************" << endl;
-	}
-};
+void Register::PrintName()
+{
+	cout << "Welcome " + fullName + "\n";
+}

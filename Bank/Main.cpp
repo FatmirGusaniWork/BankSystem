@@ -1,13 +1,15 @@
-#include <iostream>
+using namespace std;
 #include <string>
-#include <set>
-#include <cmath>
-#include <vector>
+#include <iostream>
+#include <sstream>
+#include <stdlib.h>
 #include "Register.h"
 
 
-int main(int argc, char** argv)
+int main()
 {
-	PickOption();
+	Register r;
+	r.PickOption();
 	return 0;
 };
+

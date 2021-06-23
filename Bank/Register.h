@@ -11,6 +11,8 @@ public:
 	void SignInCode();
 	void SignUpCode();
 	void PickOption();
+	void MainMenu();
+	void PrintName();
 
 };
 
