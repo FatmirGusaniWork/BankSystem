@@ -8,13 +8,13 @@ using namespace std;
 #include <stdlib.h>
 #include <windows.h>
 #include "Register.h"
+#undef max
 
 
 string fullName;
-string BankPin;
-string checkBankPin;
 string checkFullName;
-int num;
+int checkBankPin;
+int BankPin;
 int tryAgain;
 
 Register r;
@@ -24,13 +24,20 @@ void Register::SignUpCode()
 	cout << "*********************************************" << endl;
 	cout << "********************Sign Up******************" << endl;
 
-	cout << "Enter your full name : ";
-	cin >> fullName;
-	cout << "" << endl;
-	cout << "Enter Bank Pin : ";
-	cin >> BankPin;
+	cout << "Enter Full Name : ";
+	cin.ignore();
+	getline(cin, fullName);
 
-	cout << "Sign Up completed, BANK PIN : " + BankPin << endl;
+	cout << "\nEnter Bank Pin : ";
+	while (!(cin >> BankPin))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Invalid input" << endl;
+		cout << "Enter Pin : " << endl;
+	}
+
+	cout << "Sign Up completed, BANK PIN : " << BankPin << endl;
 
 	cout << "*********************************************" << endl;
 	cout << "********************Sign Up******************" << endl;
@@ -49,11 +56,16 @@ void Register::SignInCode()
 	cout << "********************Sign In******************" << endl;
 
 	cout << "Enter your full name : ";
-	cin >> checkFullName;
-	cout << "" << endl;
+	getline(cin, checkFullName);
 
-	cout << "Enter Bank Pin : " << endl;
-	cin >> checkBankPin;
+	cout << "\nEnter Bank Pin : " << endl;
+	while (!(cin >> BankPin))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Invalid input" << endl;
+		cout << "Enter Pin : " << endl;
+	}
 
 	if (checkFullName == fullName && checkBankPin == BankPin)
 	{
@@ -110,5 +122,5 @@ void Register::PickOption()
 
 void Register::PrintName()
 {
-	cout << "Welcome " + fullName + "\n";
+	cout << "Welcome " << fullName + "\n";
 }
