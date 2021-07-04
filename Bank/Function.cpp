@@ -7,6 +7,7 @@ using namespace std;
 #include <sstream>
 #include <stdlib.h>
 #include <windows.h>
+#include <algorithm>
 #include "Register.h"
 #undef max
 
@@ -17,6 +18,8 @@ string test;
 int checkBankPin;
 int BankPin;
 int tryAgain;
+//int whichfunction;
+char characterCkeck = 0;
 
 
 
@@ -31,47 +34,7 @@ void Register::SignUpCode()
 	cin.ignore();
 	getline(cin, fullName);
 
-	cout << "\nEnter Bank Pin : ";
-	cin >> test;
-
-	if(test.length() == 6)
-	{
-		stringstream convert(test);
-		convert >> BankPin;
-
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "GOOD" << endl;
-		
-		
-	}
-	else
-	{
-		cout << "Error" << endl;
-		/*
-		for (int i = 0; i < test.length(); i++)
-		{
-			if (!std::isdigit(test[i]))
-			{
-				cout << "Error, Letter Entered, Only Number Accepted" << endl;
-			}
-		}
-		test.erase();
-		*/
-		cout << "TEST 1" << endl;
-	}
-
-	/*
-	while (!(cin >> BankPin))
-	{
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "Invalid input" << endl;
-		cout << "Enter Pin : " << endl;
-	}
-	*/
-
-	
+	EnterPin(test, 1);
 
 	cout << "Sign Up completed, BANK PIN : " << BankPin << endl;
 
@@ -92,16 +55,10 @@ void Register::SignInCode()
 	cout << "********************Sign In******************" << endl;
 
 	cout << "Enter your full name : ";
+	cin.ignore();
 	getline(cin, checkFullName);
 
-	cout << "\nEnter Bank Pin : " << endl;
-	while (!(cin >> BankPin))
-	{
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "Invalid input" << endl;
-		cout << "Enter Pin : " << endl;
-	}
+	EnterPin(test, 2);
 
 	if (checkFullName == fullName && checkBankPin == BankPin)
 	{
@@ -159,4 +116,45 @@ void Register::PickOption()
 void Register::PrintName()
 {
 	cout << "Welcome " << fullName + "\n";
+}
+
+
+int Register::EnterPin(string test, int whichfunction)
+{
+	cout << "\nEnter Bank Pin : ";
+	cin >> test;
+
+	if (test.length() == 6)
+	{
+		bool b = false;
+		if (!test.empty() && std::all_of(test.begin(), test.end(), [](char c) {return std::isdigit(c); })) 
+		{
+			b = true;
+			stringstream convert(test);
+			if(whichfunction == 1)
+				convert >> BankPin;
+			if (whichfunction == 2)
+				convert >> checkBankPin;
+		}
+		else
+		{
+			if (whichfunction == 1)
+			{
+				cout << "Error, Letters Entered.\nEntered 6 digits Pin." << endl;
+				EnterPin(test, 1);
+			}
+		}
+	}
+	else
+	{
+		if (whichfunction == 1)
+		{
+			cout << "Error, Entered Pin is Not 6 digits." << endl;
+			EnterPin(test, 1);
+		}
+	}
+	if (whichfunction == 1)
+		return BankPin;
+	if (whichfunction == 2)
+		return checkBankPin;
 }

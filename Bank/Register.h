@@ -12,6 +12,7 @@ public:
 	void PickOption();
 	void MainMenu();
 	void PrintName();
+	int EnterPin(string test, int whichfunction);
 };
 
 #endif
