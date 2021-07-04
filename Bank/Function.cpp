@@ -13,9 +13,12 @@ using namespace std;
 
 string fullName;
 string checkFullName;
+string test;
 int checkBankPin;
 int BankPin;
 int tryAgain;
+
+
 
 Register r;
 
@@ -29,6 +32,36 @@ void Register::SignUpCode()
 	getline(cin, fullName);
 
 	cout << "\nEnter Bank Pin : ";
+	cin >> test;
+
+	if(test.length() == 6)
+	{
+		stringstream convert(test);
+		convert >> BankPin;
+
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "GOOD" << endl;
+		
+		
+	}
+	else
+	{
+		cout << "Error" << endl;
+		/*
+		for (int i = 0; i < test.length(); i++)
+		{
+			if (!std::isdigit(test[i]))
+			{
+				cout << "Error, Letter Entered, Only Number Accepted" << endl;
+			}
+		}
+		test.erase();
+		*/
+		cout << "TEST 1" << endl;
+	}
+
+	/*
 	while (!(cin >> BankPin))
 	{
 		cin.clear();
@@ -36,6 +69,9 @@ void Register::SignUpCode()
 		cout << "Invalid input" << endl;
 		cout << "Enter Pin : " << endl;
 	}
+	*/
+
+	
 
 	cout << "Sign Up completed, BANK PIN : " << BankPin << endl;
 
