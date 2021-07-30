@@ -9,11 +9,17 @@ using namespace std;
 #include <stdlib.h>
 #include <windows.h>
 #include "Register.h"
+#include "SQLDB.h"
 #undef max
 
 int balance = 5;
 int option;
 int amount;
+
+void Register::PassBalance(int passBalance)
+{
+	passBalance = balance;
+}
 
 void Register::MainMenu()
 {

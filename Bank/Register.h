@@ -13,6 +13,9 @@ public:
 	void MainMenu();
 	void PrintName();
 	int EnterPin(string test, int whichfunction);
+	void PassFullname(string fullName, string lastName);
+	void PassBalance(int money);
+
 };
 
 #endif

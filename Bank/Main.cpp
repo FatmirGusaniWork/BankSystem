@@ -4,6 +4,7 @@ using namespace std;
 #include <sstream>
 #include <stdlib.h>
 #include "Register.h"
+#include "SQLDB.h"
 
 
 int main()

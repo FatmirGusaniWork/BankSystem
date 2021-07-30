@@ -9,39 +9,56 @@ using namespace std;
 #include <windows.h>
 #include <algorithm>
 #include "Register.h"
+#include "SQLDB.h"
 #undef max
 
-
-string fullName;
-string checkFullName;
+string firstName;
+string lastName;
+string checkFirstName;
+string checkLastName;
 string test;
+
 int checkBankPin;
-int BankPin;
+int bankPin;
 int tryAgain;
-//int whichfunction;
-char characterCkeck = 0;
-
-
 
 Register r;
+SQLDB db;
+
+
+void Register::PassFullname(string passfirstName, string passlastName)
+{
+	firstName == passfirstName;
+	lastName == passlastName;
+}
 
 void Register::SignUpCode()
 {
 	cout << "*********************************************" << endl;
 	cout << "********************Sign Up******************" << endl;
 
-	cout << "Enter Full Name : ";
-	cin.ignore();
-	getline(cin, fullName);
+	cout << "Enter First Name : ";
+	cin >> firstName;
+
+	cout << "Enter Last Name : ";
+	cin >> lastName;
 
 	EnterPin(test, 1);
 
-	cout << "Sign Up completed, BANK PIN : " << BankPin << endl;
+	cout << "Sign Up completed, BANK PIN : " << bankPin << endl;
 
 	cout << "*********************************************" << endl;
 	cout << "********************Sign Up******************" << endl;
 
+	db.InsertDatabase();
+
 	Sleep(3000);
+
+	//Testing DataBase Viewing
+	db.ViewDatabase();
+
+
+	Sleep(5000);
 
 	system("CLS");
 	r.MainMenu();
@@ -54,13 +71,15 @@ void Register::SignInCode()
 	cout << "*********************************************" << endl;
 	cout << "********************Sign In******************" << endl;
 
-	cout << "Enter your full name : ";
-	cin.ignore();
-	getline(cin, checkFullName);
+	cout << "Enter First Name : ";
+	cin >> checkFirstName;
+
+	cout << "Enter Last Name : ";
+	cin >> checkLastName;
 
 	EnterPin(test, 2);
 
-	if (checkFullName == fullName && checkBankPin == BankPin)
+	if (checkFirstName == firstName && checkLastName == lastName && checkBankPin == bankPin)
 	{
 		system("CLS");
 		r.MainMenu();
@@ -115,7 +134,7 @@ void Register::PickOption()
 
 void Register::PrintName()
 {
-	cout << "Welcome " << fullName + "\n";
+	cout << "Welcome " << firstName + " " + lastName +  "\n";
 }
 
 
@@ -132,7 +151,7 @@ int Register::EnterPin(string test, int whichfunction)
 			b = true;
 			stringstream convert(test);
 			if(whichfunction == 1)
-				convert >> BankPin;
+				convert >> bankPin;
 			if (whichfunction == 2)
 				convert >> checkBankPin;
 		}
@@ -154,7 +173,7 @@ int Register::EnterPin(string test, int whichfunction)
 		}
 	}
 	if (whichfunction == 1)
-		return BankPin;
+		return bankPin;
 	if (whichfunction == 2)
 		return checkBankPin;
 }
