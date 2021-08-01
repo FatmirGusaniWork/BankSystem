@@ -3,14 +3,13 @@ using namespace std;
 #include <iostream>
 #include <sstream>
 #include <stdlib.h>
-#include "Register.h"
-#include "SQLDB.h"
+#include "Function.h"
 
 
 int main()
 {
-	Register r;
-	r.PickOption();
+	Function f;
+	f.PickOption();
 	return 0;
 };
 

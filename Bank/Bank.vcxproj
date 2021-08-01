@@ -148,9 +148,10 @@
     <ClCompile Include="UserDB.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Register.h" />
+    <ClInclude Include="Bank.h" />
+    <ClInclude Include="Function.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="SQLDB.h" />
+    <ClInclude Include="UserDB.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Bank.rc" />

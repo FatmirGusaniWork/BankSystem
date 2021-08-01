@@ -4,28 +4,30 @@
 using namespace std;
 #include <string>
 #include <iostream>
-#include <sstream>
-#include <limits>
+//#include <sstream>
+//#include <limits>
 #include <stdlib.h>
 #include <windows.h>
-#include "Register.h"
-#include "SQLDB.h"
+#include "Function.h"
+#include "Bank.h"
+
 #undef max
 
 int balance = 5;
 int option;
 int amount;
 
-void Register::PassBalance(int passBalance)
+void Bank::PassBalance(int passBalance)
 {
 	passBalance = balance;
 }
 
-void Register::MainMenu()
+void Bank::MainMenu()
 {
-	Register r;
 
-	r.PrintName();
+	Function f;
+
+	f.PrintName();
 
 	cout << "Balance : " <<  balance << endl;
 
@@ -95,7 +97,7 @@ void Register::MainMenu()
 
 	case 4:
 		system("CLS");
-		r.PickOption();
+		f.PickOption();
 		break;
 
 	default:

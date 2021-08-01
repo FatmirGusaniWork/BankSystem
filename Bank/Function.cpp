@@ -8,8 +8,9 @@ using namespace std;
 #include <stdlib.h>
 #include <windows.h>
 #include <algorithm>
-#include "Register.h"
-#include "SQLDB.h"
+#include "Function.h"
+#include "UserDB.h"
+#include "Bank.h"
 #undef max
 
 string firstName;
@@ -22,17 +23,18 @@ int checkBankPin;
 int bankPin;
 int tryAgain;
 
-Register r;
-SQLDB db;
+Function f;
+UserDB db;
+Bank b;
 
 
-void Register::PassFullname(string passfirstName, string passlastName)
+void Function::PassFullname(string passfirstName, string passlastName)
 {
-	firstName == passfirstName;
-	lastName == passlastName;
+	firstName = passfirstName;
+	lastName = passlastName;
 }
 
-void Register::SignUpCode()
+void Function::SignUpCode()
 {
 	cout << "*********************************************" << endl;
 	cout << "********************Sign Up******************" << endl;
@@ -57,15 +59,14 @@ void Register::SignUpCode()
 	//Testing DataBase Viewing
 	db.ViewDatabase();
 
-
 	Sleep(5000);
 
 	system("CLS");
-	r.MainMenu();
+	b.MainMenu();
 
 }
 
-void Register::SignInCode()
+void Function::SignInCode()
 {
 	int tryAgain;
 	cout << "*********************************************" << endl;
@@ -82,7 +83,7 @@ void Register::SignInCode()
 	if (checkFirstName == firstName && checkLastName == lastName && checkBankPin == bankPin)
 	{
 		system("CLS");
-		r.MainMenu();
+		b.MainMenu();
 	}
 	else
 	{
@@ -110,9 +111,9 @@ void Register::SignInCode()
 	cout << "********************Sign In******************" << endl;
 }
 
-void Register::PickOption()
+void Function::PickOption()
 {
-	Register r;
+	//Register r;
 	int option;
 	cout << "Wellcome, please pick one of the options available" << endl;
 	cout << "1 : Sign In. \n2 : Sign Up." << endl;
@@ -121,10 +122,10 @@ void Register::PickOption()
 	switch (option)
 	{
 	case 1:
-		r.SignInCode();
+		f.SignInCode();
 		break;
 	case 2:
-		r.SignUpCode();
+		f.SignUpCode();
 		break;
 	default:
 		cout << "Wrong Entery, Try Again" << endl;
@@ -132,13 +133,13 @@ void Register::PickOption()
 	}
 }
 
-void Register::PrintName()
+void Function::PrintName()
 {
 	cout << "Welcome " << firstName + " " + lastName +  "\n";
 }
 
 
-int Register::EnterPin(string test, int whichfunction)
+int Function::EnterPin(string test, int whichfunction)
 {
 	cout << "\nEnter Bank Pin : ";
 	cin >> test;

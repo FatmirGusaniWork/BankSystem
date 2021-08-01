@@ -7,8 +7,8 @@ using namespace std;
 #include <mysql.h>
 #include <iomanip>
 #include <stdio.h>
-#include "SQLDB.h"
-#include "Register.h"
+#include "UserDB.h"
+#include "Function.h"
 
 int bankID;
 string fname;
@@ -19,14 +19,17 @@ string lastname;
 string firstname;
 
 
-void SQLDB::InsertDatabase()
+void UserDB::InsertDatabase()
 {
-    Register r;
+    Function f;
 
 	for (int bankID = 1; bankID < 7; bankID++) {
 		bankID = bankID * 10 + rand() % 10;      //Generate the next 6 digits.
 	}
 
+
+
+    f.PassFullname(fname, lname);
     /*
     cout << bankID << endl;
 
@@ -49,14 +52,14 @@ void SQLDB::InsertDatabase()
     int qstate;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "localhost", "root", "******", "bankid", 0, NULL, 0);
+    conn = mysql_real_connect(conn, "localhost", "root", "***********", "bankuser", 0, NULL, 0);
 
     if (conn)
     {
        
         stringstream ss;
 
-        ss << " INSERT INTO bankuser.details (id, firstname, lastname, money) values ('" << bankID << "','" << firstname << "','" << lastname << " ','" << testbalance << "')";
+        ss << " INSERT INTO bankuser.details (id, firstname, lastname, money) values ('" << bankID << "','" << fname << "','" << lname << " ','" << testbalance << "')";
 
         string query = ss.str();
         const char* q = query.c_str();
@@ -81,7 +84,7 @@ void SQLDB::InsertDatabase()
 
 
 
-void SQLDB::ViewDatabase()
+void UserDB::ViewDatabase()
 {
     MYSQL* conn;
     MYSQL_ROW row;
@@ -90,7 +93,7 @@ void SQLDB::ViewDatabase()
     int qstate;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "localhost", "root", "*******", "bankid", 0, NULL, 0);
+    conn = mysql_real_connect(conn, "localhost", "root", "***********", "bankuser", 0, NULL, 0);
 
     if (conn)
     {
