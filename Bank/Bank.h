@@ -7,6 +7,8 @@
 
 class Bank {
 public:
+	int balance = 5;
+
 	void PassBalance(int money);
 	void MainMenu();
 };

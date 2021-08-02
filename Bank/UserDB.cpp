@@ -9,6 +9,7 @@ using namespace std;
 #include <stdio.h>
 #include "UserDB.h"
 #include "Function.h"
+#include "Bank.h"
 
 int bankID;
 string fname;
@@ -19,17 +20,27 @@ string lastname;
 string firstname;
 
 
+/*
+void UserDB::TestName(string fname)
+{
+    cout << "TEST : " << fname << endl;
+}
+*/
+
 void UserDB::InsertDatabase()
 {
     Function f;
+    Bank b;
 
-	for (int bankID = 1; bankID < 7; bankID++) {
-		bankID = bankID * 10 + rand() % 10;      //Generate the next 6 digits.
-	}
+    srand((unsigned)time(0));    
+    for (int index = 0; index < 1; index++) {
+        bankID = 100000  + (rand() % 10000000) + 1;
+        cout << "Bank ID : " <<  bankID << endl;
+    }
 
+    //cout << f.firstName << " THIS IS THE BALANCE" << endl;
+    //cout << f.lastName << " THIS IS THE BALANCE" << endl;
 
-
-    f.PassFullname(fname, lname);
     /*
     cout << bankID << endl;
 
@@ -52,14 +63,14 @@ void UserDB::InsertDatabase()
     int qstate;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "localhost", "root", "***********", "bankuser", 0, NULL, 0);
+    conn = mysql_real_connect(conn, "localhost", "root", "Fatmir16", "bankuser", 0, NULL, 0);
 
     if (conn)
     {
        
         stringstream ss;
 
-        ss << " INSERT INTO bankuser.details (id, firstname, lastname, money) values ('" << bankID << "','" << fname << "','" << lname << " ','" << testbalance << "')";
+        ss << " INSERT INTO bankuser.details (id, firstname, lastname, money) values ('" << bankID << "','" << fname << "','" << lname << " ','" << b.balance << "')";
 
         string query = ss.str();
         const char* q = query.c_str();
@@ -83,7 +94,6 @@ void UserDB::InsertDatabase()
 }
 
 
-
 void UserDB::ViewDatabase()
 {
     MYSQL* conn;
@@ -93,7 +103,7 @@ void UserDB::ViewDatabase()
     int qstate;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "localhost", "root", "***********", "bankuser", 0, NULL, 0);
+    conn = mysql_real_connect(conn, "localhost", "root", "Fatmir16", "bankuser", 0, NULL, 0);
 
     if (conn)
     {
@@ -105,10 +115,10 @@ void UserDB::ViewDatabase()
 
             while (row = mysql_fetch_row(res))
             {
-                cout << " ID : " << row[0] << endl;
-                cout << " First name: " << row[1] << endl;
-                cout << " Last name: " << row[2] << endl;
-                cout << " Money " << row[3] << endl;
+                cout << "ID : " << row[0] << endl;
+                cout << "First name: " << row[1] << endl;
+                cout << "Last name: " << row[2] << endl;
+                cout << "Money " << row[3] << endl;
             }
         }
     }

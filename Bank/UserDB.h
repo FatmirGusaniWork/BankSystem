@@ -9,7 +9,7 @@ public:
 
 	void ViewDatabase();
 	void InsertDatabase();
-
+	void TestName(string fname);
 };
 
 #endif

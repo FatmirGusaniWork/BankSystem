@@ -13,14 +13,9 @@ using namespace std;
 
 #undef max
 
-int balance = 5;
 int option;
 int amount;
 
-void Bank::PassBalance(int passBalance)
-{
-	passBalance = balance;
-}
 
 void Bank::MainMenu()
 {
@@ -29,7 +24,7 @@ void Bank::MainMenu()
 
 	f.PrintName();
 
-	cout << "Balance : " <<  balance << endl;
+	cout << "Balance : " << balance << endl;
 
 	cout << "Please pick one of the options available" << endl;
 	cout << "1 : Withdrawal. \n2 : Deposit.\n3 : Statement.\n4 : Sign Out.\n" << endl;
@@ -44,7 +39,7 @@ void Bank::MainMenu()
 		{
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				cout << "Invalid input" << endl;
+				cout << "Invalid Input" << endl;
 				cout << "Enter withdraw amount : " << endl;
 		}
 
@@ -74,15 +69,15 @@ void Bank::MainMenu()
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "Invalid input" << endl;
+			cout << "Invalid Input" << endl;
 			cout << "Enter Deposit Amount : " << endl;
 			
 		}
 
 		balance += amount;
 
-		cout << "Doposit Successfully ";
-		cout << "Balance : " << balance << endl;
+		cout << "Doposit Successfully, ";
+		cout << "New Balance : " << balance << endl;
 
 		Sleep(3000);
 		system("CLS");

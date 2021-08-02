@@ -13,26 +13,19 @@ using namespace std;
 #include "Bank.h"
 #undef max
 
-string firstName;
-string lastName;
 string checkFirstName;
 string checkLastName;
+string firstName;
+string lastName;
 string test;
 
 int checkBankPin;
 int bankPin;
 int tryAgain;
 
-Function f;
 UserDB db;
 Bank b;
-
-
-void Function::PassFullname(string passfirstName, string passlastName)
-{
-	firstName = passfirstName;
-	lastName = passlastName;
-}
+Function f;
 
 void Function::SignUpCode()
 {
@@ -41,9 +34,11 @@ void Function::SignUpCode()
 
 	cout << "Enter First Name : ";
 	cin >> firstName;
-
+	
 	cout << "Enter Last Name : ";
 	cin >> lastName;
+
+	db.TestName(firstName);
 
 	EnterPin(test, 1);
 
@@ -57,13 +52,12 @@ void Function::SignUpCode()
 	Sleep(3000);
 
 	//Testing DataBase Viewing
-	db.ViewDatabase();
+	//db.ViewDatabase();
 
 	Sleep(5000);
 
 	system("CLS");
 	b.MainMenu();
-
 }
 
 void Function::SignInCode()
@@ -122,10 +116,10 @@ void Function::PickOption()
 	switch (option)
 	{
 	case 1:
-		f.SignInCode();
+		SignInCode();
 		break;
 	case 2:
-		f.SignUpCode();
+		SignUpCode();
 		break;
 	default:
 		cout << "Wrong Entery, Try Again" << endl;
@@ -178,3 +172,4 @@ int Function::EnterPin(string test, int whichfunction)
 	if (whichfunction == 2)
 		return checkBankPin;
 }
+
