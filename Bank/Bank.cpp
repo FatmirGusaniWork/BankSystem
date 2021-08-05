@@ -10,17 +10,20 @@ using namespace std;
 #include <windows.h>
 #include "Function.h"
 #include "Bank.h"
+#include "UserDB.h"
+#include "UserDB.h"
 
 #undef max
 
 int option;
 int amount;
-
+int balance;
 
 void Bank::MainMenu()
 {
-
 	Function f;
+
+	system("CLS");
 
 	f.PrintName();
 
@@ -71,7 +74,6 @@ void Bank::MainMenu()
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Invalid Input" << endl;
 			cout << "Enter Deposit Amount : " << endl;
-			
 		}
 
 		balance += amount;
@@ -101,4 +103,79 @@ void Bank::MainMenu()
 		system("CLS");
 		MainMenu();
 	}
+}
+
+void Bank::AdminMode()
+{
+	UserDB db;
+	
+	int adminOption;
+	cout << "***************************************************" << endl;
+	cout << "                Administrator Mode                 " << endl;
+	cout << "***************************************************" << endl;
+
+	cout << "Please pick one of the options available" << endl;
+	cout << "1 : View Database." << endl;
+
+	cin >> adminOption;
+
+	switch (adminOption)
+	{
+	case 1:
+		system("CLS");
+		db.ViewDatabase();
+		break;
+
+	default:
+		cout << "Wrong Entery, Try Again" << endl;
+		Sleep(3000);
+		system("CLS");
+		AdminMode();
+	}
+}
+
+
+void Bank::EnterBalance()
+{
+	Function f;
+	UserDB db;
+
+	cout << "*************************************************************" << endl;
+	cout << "Deposit needs to be between 5 and 1000 to create new account." << endl;
+	cout << "Enter 0 to go back to Main Menu" << endl;
+	cout << "*************************************************************" << endl;
+	cout << "Enter Deposit Amount : " << endl;
+
+	while (!(cin >> balance))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		EnterBalance();
+	}
+	
+	if(balance == 0)
+	{
+		system("CLS");
+		f.PickOption();
+	}
+
+	else if (balance >= 5 && balance <= 1000)
+	{
+		cout << "Account Created Successful" << endl;
+		Sleep(3000);
+		system("CLS");
+		MainMenu();
+	}
+	else
+	{
+		cout << "Error, not within the limits, try again" << endl;
+		Sleep(3000);
+		system("CLS");
+		EnterBalance();
+	}
+}
+
+int Bank::PassBalance(int bal)
+{
+	return balance;
 }

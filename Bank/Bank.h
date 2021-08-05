@@ -7,10 +7,10 @@
 
 class Bank {
 public:
-	int balance = 5;
-
-	void PassBalance(int money);
 	void MainMenu();
+	int PassBalance(int balance);
+	void EnterBalance();
+	void AdminMode();
 };
 
 #endif

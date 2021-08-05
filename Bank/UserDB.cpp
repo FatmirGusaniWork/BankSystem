@@ -14,18 +14,14 @@ using namespace std;
 int bankID;
 string fname;
 string lname;
-
-int testbalance;
-string lastname;
-string firstname;
+int money;
 
 
-/*
-void UserDB::TestName(string fname)
+string UserDB::TestName(string firstname)
 {
-    cout << "TEST : " << fname << endl;
+    firstname = fname;
+    return fname;
 }
-*/
 
 void UserDB::InsertDatabase()
 {
@@ -37,24 +33,6 @@ void UserDB::InsertDatabase()
         bankID = 100000  + (rand() % 10000000) + 1;
         cout << "Bank ID : " <<  bankID << endl;
     }
-
-    //cout << f.firstName << " THIS IS THE BALANCE" << endl;
-    //cout << f.lastName << " THIS IS THE BALANCE" << endl;
-
-    /*
-    cout << bankID << endl;
-
-    r.PassFullname(fname, lname);
-    r.PassBalance(testbalance);
-
-    cout << fname << endl;
-    cout << lname << endl;
-    cout << testbalance << endl;
-   
-    fname = firstname;
-    lastname = lname;
-    */
-
 
     MYSQL* conn;
     MYSQL_ROW row;
@@ -70,7 +48,7 @@ void UserDB::InsertDatabase()
        
         stringstream ss;
 
-        ss << " INSERT INTO bankuser.details (id, firstname, lastname, money) values ('" << bankID << "','" << fname << "','" << lname << " ','" << b.balance << "')";
+        ss << " INSERT INTO bankuser.details (id, firstname, lastname, money) values ('" << bankID << "','" << f.PassFirstName(fname) << "','" << f.PassLastName(lname) << " ','" << b.PassBalance(money) << "')";
 
         string query = ss.str();
         const char* q = query.c_str();
@@ -115,6 +93,7 @@ void UserDB::ViewDatabase()
 
             while (row = mysql_fetch_row(res))
             {
+                cout << endl;
                 cout << "ID : " << row[0] << endl;
                 cout << "First name: " << row[1] << endl;
                 cout << "Last name: " << row[2] << endl;

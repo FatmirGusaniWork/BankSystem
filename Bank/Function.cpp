@@ -34,11 +34,15 @@ void Function::SignUpCode()
 
 	cout << "Enter First Name : ";
 	cin >> firstName;
+
+	db.TestName(firstName);
 	
 	cout << "Enter Last Name : ";
 	cin >> lastName;
 
-	db.TestName(firstName);
+	//EnterBalance();
+
+	//db.TestName(firstName);
 
 	EnterPin(test, 1);
 
@@ -47,17 +51,14 @@ void Function::SignUpCode()
 	cout << "*********************************************" << endl;
 	cout << "********************Sign Up******************" << endl;
 
-	db.InsertDatabase();
-
 	Sleep(3000);
 
 	//Testing DataBase Viewing
-	//db.ViewDatabase();
 
 	Sleep(5000);
 
 	system("CLS");
-	b.MainMenu();
+	b.EnterBalance();
 }
 
 void Function::SignInCode()
@@ -74,7 +75,13 @@ void Function::SignInCode()
 
 	EnterPin(test, 2);
 
-	if (checkFirstName == firstName && checkLastName == lastName && checkBankPin == bankPin)
+	if (checkFirstName == "Admin" && checkLastName == "Mode" && checkBankPin == 0)
+	{
+		system("CLS");
+		b.AdminMode();
+	}
+
+	else if  (checkFirstName == firstName && checkLastName == lastName && checkBankPin == bankPin)
 	{
 		system("CLS");
 		b.MainMenu();
@@ -113,6 +120,8 @@ void Function::PickOption()
 	cout << "1 : Sign In. \n2 : Sign Up." << endl;
 	cin >> option;
 
+	system("CLS");
+
 	switch (option)
 	{
 	case 1:
@@ -127,9 +136,20 @@ void Function::PickOption()
 	}
 }
 
+
 void Function::PrintName()
 {
 	cout << "Welcome " << firstName + " " + lastName +  "\n";
+}
+
+string Function::PassFirstName(string fname)
+{
+	return firstName;
+}
+
+string Function::PassLastName(string lname)
+{
+	return lastName;
 }
 
 

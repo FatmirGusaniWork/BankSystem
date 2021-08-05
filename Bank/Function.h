@@ -4,7 +4,6 @@
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
-
 class Function {
 public:
 
@@ -12,6 +11,8 @@ public:
 	void SignUpCode();
 	void PickOption();
 	void PrintName();
+	string PassFirstName(string firstname);
+	string PassLastName(string lastname);
 	int EnterPin(string test, int whichfunction);
 };
 
