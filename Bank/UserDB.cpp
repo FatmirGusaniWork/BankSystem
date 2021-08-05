@@ -41,7 +41,7 @@ void UserDB::InsertDatabase()
     int qstate;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "localhost", "root", "Fatmir16", "bankuser", 0, NULL, 0);
+    conn = mysql_real_connect(conn, "localhost", "root", "*", "bankuser", 0, NULL, 0);
 
     if (conn)
     {
@@ -81,7 +81,7 @@ void UserDB::ViewDatabase()
     int qstate;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "localhost", "root", "Fatmir16", "bankuser", 0, NULL, 0);
+    conn = mysql_real_connect(conn, "localhost", "root", "*", "bankuser", 0, NULL, 0);
 
     if (conn)
     {
