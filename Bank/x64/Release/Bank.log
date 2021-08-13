@@ -1,11 +1,7 @@
 ﻿  Bank.cpp
-C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\Bank.cpp(140,9): warning C4101: 'db': unreferenced local variable
-  UserDB.cpp
-C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\UserDB.cpp(39,16): warning C4101: 'res': unreferenced local variable
-C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\UserDB.cpp(38,15): warning C4101: 'row': unreferenced local variable
   Generating code
-  3 of 211 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
+  4 of 222 functions ( 1.8%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Bank.vcxproj -> C:\Users\Fatmir\source\repos\FatmirGusaniWork\x64\Release\Bank.exe

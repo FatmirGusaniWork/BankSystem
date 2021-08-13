@@ -7,9 +7,8 @@
 class UserDB {
 public:
 
-	void ViewDatabase();
-	void InsertDatabase();
-	string TestName(string fname);
+	void DatabaseOption(int option);
+	int PassBankID(int ID);
 };
 
 #endif

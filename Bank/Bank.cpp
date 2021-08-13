@@ -18,15 +18,17 @@ using namespace std;
 int option;
 int amount;
 int balance;
+int bankID;
 
 void Bank::MainMenu()
 {
 	Function f;
+	UserDB db;
 
 	system("CLS");
 
 	f.PrintName();
-
+	cout << "Bank ID Number : " << db.PassBankID(bankID) << endl;
 	cout << "Balance : " << balance << endl;
 
 	cout << "Please pick one of the options available" << endl;
@@ -115,7 +117,7 @@ void Bank::AdminMode()
 	cout << "***************************************************" << endl;
 
 	cout << "Please pick one of the options available" << endl;
-	cout << "1 : View Database." << endl;
+	cout << "1 : View Database.\n2 : Search Database." << endl;
 
 	cin >> adminOption;
 
@@ -123,7 +125,11 @@ void Bank::AdminMode()
 	{
 	case 1:
 		system("CLS");
-		db.ViewDatabase();
+		db.DatabaseOption(2);
+		break;
+	case 2:
+		system("CLS");
+		db.DatabaseOption(3);
 		break;
 
 	default:
@@ -161,6 +167,7 @@ void Bank::EnterBalance()
 
 	else if (balance >= 5 && balance <= 1000)
 	{
+		db.DatabaseOption(1);
 		cout << "Account Created Successful" << endl;
 		Sleep(3000);
 		system("CLS");
