@@ -34,8 +34,6 @@ void Function::SignUpCode()
 
 	cout << "Enter First Name : ";
 	cin >> firstName;
-
-	db.TestName(firstName);
 	
 	cout << "Enter Last Name : ";
 	cin >> lastName;

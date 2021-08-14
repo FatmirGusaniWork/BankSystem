@@ -18,7 +18,7 @@ using namespace std;
 int option;
 int amount;
 int balance;
-int bankID;
+int getBankID;
 
 void Bank::MainMenu()
 {
@@ -27,12 +27,15 @@ void Bank::MainMenu()
 
 	system("CLS");
 
+	db.PassBankID(getBankID);
+
 	f.PrintName();
-	cout << "Bank ID Number : " << db.PassBankID(bankID) << endl;
+	cout << "Bank ID Number : " << getBankID << endl;
 	cout << "Balance : " << balance << endl;
 
 	cout << "Please pick one of the options available" << endl;
 	cout << "1 : Withdrawal. \n2 : Deposit.\n3 : Statement.\n4 : Sign Out.\n" << endl;
+	cout << "Option : ";
 	
 	cin >> option;
 
@@ -52,7 +55,9 @@ void Bank::MainMenu()
 		{
 			cout << balance << endl;
 			balance -= amount;
+		
 			cout << "Withdraw Successful" << endl;
+			db.DatabaseOption(4);
 			cout << "New Balance : " << balance << endl;
 		}
 		else
@@ -81,6 +86,7 @@ void Bank::MainMenu()
 		balance += amount;
 
 		cout << "Doposit Successfully, ";
+		db.DatabaseOption(4);
 		cout << "New Balance : " << balance << endl;
 
 		Sleep(3000);
@@ -130,6 +136,7 @@ void Bank::AdminMode()
 	case 2:
 		system("CLS");
 		db.DatabaseOption(3);
+		Sleep(5000);
 		break;
 
 	default:

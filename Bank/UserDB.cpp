@@ -15,10 +15,10 @@ using namespace std;
 #include "Function.h"
 #include "Bank.h"
 
-int bankID;
 string fname;
 string lname;
 int money;
+int bankID;
 
 void UserDB::DatabaseOption(int option)
 {
@@ -26,6 +26,7 @@ void UserDB::DatabaseOption(int option)
     Bank b;
 
     srand((unsigned)time(0));
+
     for (int index = 0; index < 1; index++) {
         bankID = 100000 + (rand() % 10000000) + 1;
         //cout << "Bank ID : " << bankID << endl;
@@ -40,7 +41,6 @@ void UserDB::DatabaseOption(int option)
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, "localhost", "root", "Fatmir16", "bankuser", 0, NULL, 0);
 
-
     switch (option)
     {
 
@@ -49,7 +49,7 @@ void UserDB::DatabaseOption(int option)
         {
             stringstream ss;
 
-            ss << " INSERT INTO bankuser.details (id, firstname, lastname, money) values ('" << bankID << "','" << f.PassFirstName(fname) << "','" << f.PassLastName(lname) << " ','" << b.PassBalance(money) << "')";
+            ss << "INSERT INTO bankuser.details (id, firstname, lastname, money) values ('" << bankID << "','" << f.PassFirstName(fname) << "','" << f.PassLastName(lname) << " ','" << b.PassBalance(money) << "')";
 
             string query = ss.str();
             const char* q = query.c_str();
@@ -58,11 +58,11 @@ void UserDB::DatabaseOption(int option)
             if (qstate == 0)
             {
 
-                cout << " Record inserted successfully ..." << endl;
+                cout << "Record inserted successfully ..." << endl;
             }
             else
             {
-                cout << " Error, data not inserted..." << endl;
+                cout << "Error, data not inserted..." << endl;
             }
         }
 
@@ -70,7 +70,8 @@ void UserDB::DatabaseOption(int option)
         {
             cout << " Connection failure" << endl;
         }
-        break;
+
+        b.AdminMode();
 
     case 2:
         if (conn)
@@ -97,6 +98,8 @@ void UserDB::DatabaseOption(int option)
             cout << " Connection failure" << endl;
         }
 
+        b.AdminMode();
+
     case 3:
         if (conn)
         {
@@ -104,23 +107,15 @@ void UserDB::DatabaseOption(int option)
             cout << "Enter Search Name : ";
             cin >> searchName;
 
-
             stringstream ss;
 
-            //ss << "SELECT * FROM bankuser.detail WHERE firstname = 'searchName';";
+            
 
-            //ss << "SELECT * FROM bankuser.details WHERE CONCAT(name) LIKE CONCAT('%', REPLACE(? , ' ', '%'), '%') ORDER BY LEVENSTEIN(CONCAT(name, ' ', surname), ? )"
-
-            //ss << "SELECT * FROM bankuser.details WHERE firstname(name) AGAINST('searchName' IN BOOLEAN MODE)";
-            //ss << "SELECT * FROM bankuser.details WHERE firstname LIKE '" <<  searchName <<  "'%'";
+            ss << "SELECT * FROM bankuser.details WHERE firstname = '"+ searchName +"' ";
 
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
-
-
-            //qstate = mysql_query(conn, "SELECT * FROM bankuser.details WHERE firstname LIKE 't%'");
-
 
             if (!qstate)
             {
@@ -140,6 +135,54 @@ void UserDB::DatabaseOption(int option)
         else
         {
             cout << " Connection failure" << endl;
+        }
+
+        b.AdminMode();
+
+    case 4:
+        if (conn)
+        {
+            qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
+           // $result = mysqli_query($conn, "UPDATE assets SET Asset_name='$name',Classification='$classification',Tag='$tag',
+            //Department='$department',Review_date='$reviewdate', Responsible='$responsible' WHERE id='$id'");
+            //b.PassBalance(money);
+            stringstream ss;
+
+            //ss << "UPDATE bankuser.details SET firstname = '" + fname + "' WHERE id = ? ";
+
+            ss << "UPDATE bankuser.details SET money = " << money << " WHERE id = " << bankID;
+
+
+            string query = ss.str();
+            const char* q = query.c_str();
+
+            if (!qstate)
+            {
+                res = mysql_store_result(conn);
+            }
+        }
+
+        else
+        {
+            cout << " Connection failure" << endl;
+        }
+
+    case 5:
+
+        qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
+
+        if (!qstate)
+        {
+            res = mysql_store_result(conn);
+
+            while (row = mysql_fetch_row(res))
+            {
+                cout << endl;
+                cout << "ID : " << row[0] << endl;
+                cout << "First name: " << row[1] << endl;
+                cout << "Last name: " << row[2] << endl;
+                cout << "Money " << row[3] << endl;
+            }
         }
 
     }
