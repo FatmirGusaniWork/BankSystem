@@ -53,9 +53,7 @@ void Bank::MainMenu()
 
 		if (balance >= amount && amount > 0)
 		{
-			cout << balance << endl;
 			balance -= amount;
-		
 			cout << "Withdraw Successful" << endl;
 			db.DatabaseOption(4);
 			cout << "New Balance : " << balance << endl;
@@ -92,7 +90,6 @@ void Bank::MainMenu()
 		Sleep(3000);
 		system("CLS");
 		MainMenu();
-
 		break;
 
 	case 3:
@@ -157,7 +154,7 @@ void Bank::EnterBalance()
 	cout << "Deposit needs to be between 5 and 1000 to create new account." << endl;
 	cout << "Enter 0 to go back to Main Menu" << endl;
 	cout << "*************************************************************" << endl;
-	cout << "Enter Deposit Amount : " << endl;
+	cout << "Enter Deposit Amount : ";
 
 	while (!(cin >> balance))
 	{

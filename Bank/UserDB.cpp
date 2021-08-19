@@ -20,6 +20,7 @@ string lname;
 int money;
 int bankID;
 
+
 void UserDB::DatabaseOption(int option)
 {
     Function f;
@@ -45,6 +46,7 @@ void UserDB::DatabaseOption(int option)
     {
 
     case 1:
+        /////////////// INSERT ///////////////
         if (conn)
         {
             stringstream ss;
@@ -70,10 +72,11 @@ void UserDB::DatabaseOption(int option)
         {
             cout << " Connection failure" << endl;
         }
-
-        b.AdminMode();
+        break;
+        
 
     case 2:
+        /////////////// VIEW ///////////////
         if (conn)
         {
             qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
@@ -98,20 +101,20 @@ void UserDB::DatabaseOption(int option)
             cout << " Connection failure" << endl;
         }
 
-        b.AdminMode();
+        break;
 
     case 3:
+        /////////////// SEARCH ///////////////
         if (conn)
         {
+            
             string searchName;
             cout << "Enter Search Name : ";
             cin >> searchName;
 
             stringstream ss;
 
-            
-
-            ss << "SELECT * FROM bankuser.details WHERE firstname = '"+ searchName +"' ";
+            ss << "SELECT * FROM bankuser.details WHERE firstname = '" + searchName + "' ";
 
             string query = ss.str();
             const char* q = query.c_str();
@@ -137,24 +140,21 @@ void UserDB::DatabaseOption(int option)
             cout << " Connection failure" << endl;
         }
 
-        b.AdminMode();
+        break;
 
     case 4:
+        /////////////// UPDATE ///////////////
         if (conn)
         {
-            qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
-           // $result = mysqli_query($conn, "UPDATE assets SET Asset_name='$name',Classification='$classification',Tag='$tag',
-            //Department='$department',Review_date='$reviewdate', Responsible='$responsible' WHERE id='$id'");
-            //b.PassBalance(money);
+            b.PassBalance(money);
+           // qstate = mysql_query(conn, "UPDATE bankuser.details SET money = money + 1  WHERE id = 42");
+           // qstate = mysql_query(conn,"UPDATE bankuser.details SET money = money + @money WHERE id = @bankID");
+            //ss << "UPDATE bankuser.details SET money = money + @money";
             stringstream ss;
-
-            //ss << "UPDATE bankuser.details SET firstname = '" + fname + "' WHERE id = ? ";
-
-            ss << "UPDATE bankuser.details SET money = " << money << " WHERE id = " << bankID;
-
 
             string query = ss.str();
             const char* q = query.c_str();
+            qstate = mysql_query(conn, q);
 
             if (!qstate)
             {
@@ -167,24 +167,38 @@ void UserDB::DatabaseOption(int option)
             cout << " Connection failure" << endl;
         }
 
+        break;
+
     case 5:
-
-        qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
-
-        if (!qstate)
+        /////////////// READ ///////////////
+        
+        if (conn)
         {
-            res = mysql_store_result(conn);
+            string test[7] = {};
+            qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
 
-            while (row = mysql_fetch_row(res))
+            if (!qstate)
             {
-                cout << endl;
-                cout << "ID : " << row[0] << endl;
-                cout << "First name: " << row[1] << endl;
-                cout << "Last name: " << row[2] << endl;
-                cout << "Money " << row[3] << endl;
+                res = mysql_store_result(conn);
+
+                while (row = mysql_fetch_row(res))
+                {
+                    cout << endl;
+                    cout << "ID : " << row[0] << endl; 
+                    cout << "First name: " << row[1] << endl;
+                    cout << "Last name: " << row[2] << endl;
+                    cout << "Money " << row[3] << endl;
+                }
             }
         }
 
+        else
+        {
+            cout << " Connection failure" << endl;
+        }
+
+        break;
+        
     }
 }
 

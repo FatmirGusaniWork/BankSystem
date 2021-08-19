@@ -116,6 +116,8 @@ void Function::PickOption()
 	int option;
 	cout << "Wellcome, please pick one of the options available" << endl;
 	cout << "1 : Sign In. \n2 : Sign Up." << endl;
+	cout << "Option : ";
+
 	cin >> option;
 
 	system("CLS");
