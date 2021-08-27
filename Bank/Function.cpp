@@ -38,10 +38,6 @@ void Function::SignUpCode()
 	cout << "Enter Last Name : ";
 	cin >> lastName;
 
-	//EnterBalance();
-
-	//db.TestName(firstName);
-
 	EnterPin(test, 1);
 
 	cout << "Sign Up completed, BANK PIN : " << bankPin << endl;
@@ -50,11 +46,6 @@ void Function::SignUpCode()
 	cout << "********************Sign Up******************" << endl;
 
 	Sleep(3000);
-
-	//Testing DataBase Viewing
-
-	Sleep(5000);
-
 	system("CLS");
 	b.EnterBalance();
 }

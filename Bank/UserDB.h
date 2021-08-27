@@ -8,6 +8,7 @@ class UserDB {
 public:
 	void DatabaseOption(int option);
 	int PassBankID(int ID);
+	string passRow(string row);
 };
 
 #endif

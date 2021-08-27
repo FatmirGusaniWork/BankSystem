@@ -27,10 +27,8 @@ void Bank::MainMenu()
 
 	system("CLS");
 
-	db.PassBankID(getBankID);
-
 	f.PrintName();
-	cout << "Bank ID Number : " << getBankID << endl;
+	cout << "Bank ID Number : " << db.PassBankID(getBankID) << endl;
 	cout << "Balance : " << balance << endl;
 
 	cout << "Please pick one of the options available" << endl;
@@ -120,7 +118,7 @@ void Bank::AdminMode()
 	cout << "***************************************************" << endl;
 
 	cout << "Please pick one of the options available" << endl;
-	cout << "1 : View Database.\n2 : Search Database." << endl;
+	cout << "1 : View Database.\n2 : Search Database.\n3: Update Details" << endl;
 
 	cin >> adminOption;
 
@@ -133,6 +131,18 @@ void Bank::AdminMode()
 	case 2:
 		system("CLS");
 		db.DatabaseOption(3);
+		Sleep(5000);
+		break;
+
+	case 3:
+		system("CLS");
+		db.DatabaseOption(6);
+		Sleep(5000);
+		break;
+
+	case 4:
+		system("CLS");
+		db.DatabaseOption(7);
 		Sleep(5000);
 		break;
 
@@ -172,7 +182,7 @@ void Bank::EnterBalance()
 	else if (balance >= 5 && balance <= 1000)
 	{
 		db.DatabaseOption(1);
-		cout << "Account Created Successful" << endl;
+		cout << "Account Created Successful ..." << endl;
 		Sleep(3000);
 		system("CLS");
 		MainMenu();
