@@ -17,6 +17,7 @@ using namespace std;
 
 string fname;
 string lname;
+int bpin;
 int money;
 int bankID;
 string getID;
@@ -56,7 +57,7 @@ void UserDB::DatabaseOption(int option)
         {
             stringstream ss;
 
-            ss << "INSERT INTO bankuser.details (id, firstname, lastname, money) values ('" << bankID << "','" << f.PassFirstName(fname) << "','" << f.PassLastName(lname) << " ','" << b.PassBalance(money) << "')";
+            ss << "INSERT INTO bankuser.details (id, firstname, lastname, bankpin, money) values ('" << bankID << "','" << f.PassFirstName(fname) << "','" << f.PassLastName(lname) << " ','"  << f.PassBankPin(bpin) <<   " ','" << b.PassBalance(money) << "')";
 
             string query = ss.str();
             const char* q = query.c_str();
@@ -96,7 +97,8 @@ void UserDB::DatabaseOption(int option)
                     cout << "ID : " << row[0] << endl;
                     cout << "First name: " << row[1] << endl;
                     cout << "Last name: " << row[2] << endl;
-                    cout << "Money " << row[3] << endl;
+                    cout << "Bank Pin: " << row[3] << endl;
+                    cout << "Money " << row[4] << endl;
                 }
             }
         }
@@ -135,7 +137,8 @@ void UserDB::DatabaseOption(int option)
                     cout << "ID : " << row[0] << endl;
                     cout << "First name: " << row[1] << endl;
                     cout << "Last name: " << row[2] << endl;
-                    cout << "Money " << row[3] << endl;
+                    cout << "Bank Pin: " << row[3] << endl;
+                    cout << "Money " << row[4] << endl;
                 }
             }
         }
@@ -177,117 +180,7 @@ void UserDB::DatabaseOption(int option)
         break;
 
     case 5:
-        /////////////// TESTING ///////////////
-        
-        if (conn)
-        {
-            string test[7] = {};
-            qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
-
-            if (!qstate)
-            {
-                res = mysql_store_result(conn);
-
-                while (row = mysql_fetch_row(res))
-                {
-                    cout << endl;
-                    cout << "ID : " << row[0] << endl; 
-                    cout << "First name: " << row[1] << endl;
-                    cout << "Last name: " << row[2] << endl;
-                    cout << "Money " << row[3] << endl;
-                }
-            }
-        }
-
-        else
-        {
-            cout << " Connection failure" << endl;
-        }
-
-        break;
-
-    case 6:
-        /////////////// TESTING ///////////////
-
-        if (conn)
-        {
-            string updateNewLastName;
-
-            cout << "Enter Update Name : ";
-            cin >> updateNewLastName;
-
-
-            stringstream ss;
-
-            ss << "UPDATE bankuser.details SET lastname = " <<  updateNewLastName << "  WHERE(id = 122249)";
-
-            string query = ss.str();
-            const char* q = query.c_str();
-            qstate = mysql_query(conn, q);
-
-            if (!qstate)
-            {
-                res = mysql_store_result(conn);
-
-                /*
-                while (row = mysql_fetch_row(res))
-                {
-                    cout << endl;
-                    cout << "ID : " << row[0] << endl;
-                    cout << "First name: " << row[1] << endl;
-                    cout << "Last name: " << row[2] << endl;
-                    cout << "Money " << row[3] << endl;
-                }
-                */
-            }
-            system("CLS");
-            b.AdminMode();
-        }
-
-        else
-        {
-            cout << " Connection failure" << endl;
-        }
-
-        break;
-
-    case 7:
-        if (conn)
-        {
-
-            string searchName;
-            cout << "Enter Search Name : ";
-            cin >> searchName;
-
-            stringstream ss;
-
-            ss << "SELECT * FROM bankuser.details WHERE firstname = " << searchName;
-
-            string query = ss.str();
-            const char* q = query.c_str();
-            qstate = mysql_query(conn, q);
-
-            if (!qstate)
-            {
-                res = mysql_store_result(conn);
-
-                while (row = mysql_fetch_row(res))
-                {
-                    cout << endl;
-                    cout << "ID : " << row[0] << endl;
-                    cout << "First name: " << row[1] << endl;
-                    cout << "Last name: " << row[2] << endl;
-                    cout << "Money " << row[3] << endl;
-                }
-                getID == row[0];
-            }
-        }
-
-        else
-        {
-            cout << " Connection failure" << endl;
-        }
-
+       
         break;
     }
 }
@@ -295,9 +188,4 @@ void UserDB::DatabaseOption(int option)
 int UserDB::PassBankID(int ID)
 {
     return bankID;
-}
-
-string UserDB::passRow(string row)
-{
-    return getID;
 }

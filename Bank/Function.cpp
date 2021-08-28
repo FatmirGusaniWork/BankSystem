@@ -143,6 +143,11 @@ string Function::PassLastName(string lname)
 	return lastName;
 }
 
+int Function::PassBankPin(int bpin)
+{
+	return bankPin;
+}
+
 
 int Function::EnterPin(string test, int whichfunction)
 {
