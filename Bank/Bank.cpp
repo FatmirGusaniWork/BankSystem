@@ -142,7 +142,7 @@ void Bank::AdminMode()
 
 	case 4:
 		system("CLS");
-		db.DatabaseOption(7);
+		db.DatabaseOption(5);
 		Sleep(5000);
 		break;
 

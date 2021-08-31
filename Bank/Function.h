@@ -6,13 +6,13 @@
 
 class Function {
 public:
-
 	void SignInCode();
 	void SignUpCode();
 	void PickOption();
 	void PrintName();
 	string PassFirstName(string firstname);
 	string PassLastName(string lastname);
+
 	int PassBankPin(int bpin);
 	int EnterPin(string test, int whichfunction);
 };

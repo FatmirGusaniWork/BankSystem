@@ -69,12 +69,6 @@ void Function::SignInCode()
 		system("CLS");
 		b.AdminMode();
 	}
-
-	else if  (checkFirstName == firstName && checkLastName == lastName && checkBankPin == bankPin)
-	{
-		system("CLS");
-		b.MainMenu();
-	}
 	else
 	{
 		system("CLS");
@@ -127,28 +121,6 @@ void Function::PickOption()
 	}
 }
 
-
-void Function::PrintName()
-{
-	cout << "Welcome " << firstName + " " + lastName +  "\n";
-}
-
-string Function::PassFirstName(string fname)
-{
-	return firstName;
-}
-
-string Function::PassLastName(string lname)
-{
-	return lastName;
-}
-
-int Function::PassBankPin(int bpin)
-{
-	return bankPin;
-}
-
-
 int Function::EnterPin(string test, int whichfunction)
 {
 	cout << "\nEnter Bank Pin : ";
@@ -188,4 +160,25 @@ int Function::EnterPin(string test, int whichfunction)
 	if (whichfunction == 2)
 		return checkBankPin;
 }
+
+void Function::PrintName()
+{
+	cout << "Welcome " << firstName + " " + lastName + "\n";
+}
+
+string Function::PassFirstName(string fname)
+{
+	return firstName;
+}
+
+string Function::PassLastName(string lname)
+{
+	return lastName;
+}
+
+int Function::PassBankPin(int bpin)
+{
+	return bankPin;
+}
+
 
