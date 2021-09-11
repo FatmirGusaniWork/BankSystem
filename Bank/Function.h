@@ -10,8 +10,12 @@ public:
 	void SignUpCode();
 	void PickOption();
 	void PrintName();
+
 	string PassFirstName(string firstname);
 	string PassLastName(string lastname);
+
+	string PassCheckFN(string checkfirstname);
+	string PassCheckLN(string checklastname);
 
 	int PassBankPin(int bpin);
 	int EnterPin(string test, int whichfunction);

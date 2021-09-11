@@ -26,6 +26,10 @@ int bpin;
 int money;
 int bankID;
 string getID;
+char* val;
+char* val2;
+
+
 
 
 void UserDB::DatabaseOption(int option)
@@ -185,39 +189,44 @@ void UserDB::DatabaseOption(int option)
 
     case 5:
 
-        // WORK IN PROGRESS // 
         if (conn)
         {
-            
-            string arrayOffName[10];
-            string arrayOflName[10];
-
             qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
 
             if (!qstate)
             {
                 res = mysql_store_result(conn);
 
-                cout << "GOT HERE";
-
                 while (row = mysql_fetch_row(res))
                 {
-                    cout << row[1] << endl;
-                    arrayOffName[1] == row[1];
-                    cout << "" << arrayOffName[1] << endl;
 
-                    row[2] == arrayOffName[2];
-                    cout << "" << arrayOffName[2] << endl;
+                     val = row[1];
+                     val2 = row[2];
 
-                    //for (int i = 0; i < 10; i++)
-                    //{
-                    //    cout row[1] == arrayOffName[i];    
-                    //    cout << arrayOffName[i];
-                    //}
+
+                    
+                    f.PassCheckFN(checkfname);
+                    f.PassCheckLN(checklname);
+
+
+
+                    cout << "check first name : " << f.PassCheckFN(checkfname) << endl;
+                    cout << "check first name : " << f.PassCheckLN(checklname) << endl;
+
+                    cout << endl;
+                    cout << "First name: " << row[1] << endl;
+                    cout << "Last name: " << row[2] << endl;
+
+
+                    cout << "Char : " << val << endl;
+
+                    if (checkfname == val && checklname == val2)
+                        cout << "MATCH FN AND LN " << endl;
+                    else
+                        cout << "FN AND LN FAILED" << endl;
+
                 }
             }
-
-
         }
 
         else
@@ -232,4 +241,15 @@ void UserDB::DatabaseOption(int option)
 int UserDB::PassBankID(int ID)
 {
     return bankID;
+}
+
+char* UserDB::PassVal1(string passVal1)
+{
+    return val;
+}
+
+
+char* UserDB::PassVal2(string passVal2)
+{
+    return val2;
 }

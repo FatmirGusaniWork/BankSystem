@@ -19,6 +19,9 @@ string firstName;
 string lastName;
 string test;
 
+string t1;
+string t2;
+
 int checkBankPin;
 int bankPin;
 int tryAgain;
@@ -64,14 +67,23 @@ void Function::SignInCode()
 
 	EnterPin(test, 2);
 
+	db.DatabaseOption(5);
+
+
 	if (checkFirstName == "Admin" && checkLastName == "Mode" && checkBankPin == 0)
 	{
 		system("CLS");
 		b.AdminMode();
 	}
+	else if (db.PassVal1(t1) == checkFirstName && db.PassVal2(t2) == checkLastName && checkBankPin == 123123)
+	{
+		cout << "GOT IN" << endl;
+		b.MainMenu();
+	}
+
 	else
 	{
-		system("CLS");
+		//system("CLS");
 		cout << "SIGN IN FAILED, Try Again" << endl;
 
 		cout << "1 : Try Again\n2 : Sign Up\n3 : EXIT" << endl;
@@ -179,6 +191,16 @@ string Function::PassLastName(string lname)
 int Function::PassBankPin(int bpin)
 {
 	return bankPin;
+}
+
+string Function::PassCheckFN(string checkfirstname)
+{
+	return checkFirstName;
+}
+
+string Function::PassCheckLN(string checklastname)
+{
+	return checkLastName;
 }
 
 

@@ -1,9 +1,9 @@
-﻿  UserDB.cpp
-C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\UserDB.cpp(205,37): warning C4834: discarding return value of function with 'nodiscard' attribute
-C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\UserDB.cpp(208,28): warning C4834: discarding return value of function with 'nodiscard' attribute
+﻿  Bank.cpp
+  Function.cpp
+  UserDB.cpp
   Generating code
-  2 of 224 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+  30 of 232 functions (12.9%) were compiled, the rest were copied from previous compilation.
+    7 functions were new in current compilation
+    25 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Bank.vcxproj -> C:\Users\Fatmir\source\repos\FatmirGusaniWork\x64\Release\Bank.exe
