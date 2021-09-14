@@ -18,19 +18,15 @@ using namespace std;
 
 string checkfname;
 string checklname;
-int checkbankpin;
+int checkbpin;
 
 string fname;
 string lname;
 int bpin;
+
 int money;
 int bankID;
 string getID;
-char* val;
-char* val2;
-
-
-
 
 void UserDB::DatabaseOption(int option)
 {
@@ -66,8 +62,10 @@ void UserDB::DatabaseOption(int option)
         {
             stringstream ss;
 
-            ss << "INSERT INTO bankuser.details (id, firstname, lastname, bankpin, money) values ('" << bankID << "','" << f.PassFirstName(fname) << "','" << f.PassLastName(lname) << " ','" << f.PassBankPin(bpin) << " ','" << b.PassBalance(money) << "')";
+            ss << "INSERT INTO bankuser.details (id, firstname, lastname, bankpin, money) values ('" << bankID << "','" << f.PassValueOption(fname, 1) << "','" << f.PassValueOption(lname, 2) << " ','" << f.PassBankPin(bpin) << " ','" << b.PassBalance(money) << "')";
 
+
+            cout << "TEST NAME " << f.PassValueOption(fname, 1) << endl;
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
@@ -191,6 +189,10 @@ void UserDB::DatabaseOption(int option)
 
         if (conn)
         {
+            char* val1;
+            char* val2;
+            char* val3;
+
             qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
 
             if (!qstate)
@@ -199,32 +201,28 @@ void UserDB::DatabaseOption(int option)
 
                 while (row = mysql_fetch_row(res))
                 {
-
-                     val = row[1];
-                     val2 = row[2];
-
-
+                    string rowValue1;
+                    string rowValue2;
                     
-                    f.PassCheckFN(checkfname);
-                    f.PassCheckLN(checklname);
+                    val1 = row[1];
+                    val2 = row[2];
+                    val3 = row[3];
 
+                    stringstream s1;
+                    s1 << val1;
+                    s1 >> rowValue1;
 
+                    stringstream s2;
+                    s2 << val2;
+                    s2 >> rowValue2;
 
-                    cout << "check first name : " << f.PassCheckFN(checkfname) << endl;
-                    cout << "check first name : " << f.PassCheckLN(checklname) << endl;
+                    int rowValue3 = atoi(val3);
 
-                    cout << endl;
-                    cout << "First name: " << row[1] << endl;
-                    cout << "Last name: " << row[2] << endl;
-
-
-                    cout << "Char : " << val << endl;
-
-                    if (checkfname == val && checklname == val2)
-                        cout << "MATCH FN AND LN " << endl;
-                    else
-                        cout << "FN AND LN FAILED" << endl;
-
+                    if(rowValue1 == f.PassValueOption(checkfname, 3) && rowValue2 == f.PassValueOption(checklname, 4) && f.PassCheckBankPin(checkbpin) == rowValue3)
+                    {
+                            cout << "WE GOT IN" << endl;
+                            b.MainMenu();
+                    }
                 }
             }
         }
@@ -243,6 +241,9 @@ int UserDB::PassBankID(int ID)
     return bankID;
 }
 
+
+/*
+
 char* UserDB::PassVal1(string passVal1)
 {
     return val;
@@ -253,3 +254,5 @@ char* UserDB::PassVal2(string passVal2)
 {
     return val2;
 }
+
+*/

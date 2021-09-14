@@ -8,9 +8,8 @@ class UserDB {
 public:
 	void DatabaseOption(int option);
 	int PassBankID(int ID);
-	string passRow(string row);
-	char* PassVal2(string val2);
-	char* PassVal1(string val1);
+	//char* PassVal2(string val2);
+	//char* PassVal1(string val1);
 };
 
 #endif

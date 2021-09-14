@@ -19,8 +19,6 @@ string firstName;
 string lastName;
 string test;
 
-string t1;
-string t2;
 
 int checkBankPin;
 int bankPin;
@@ -75,11 +73,6 @@ void Function::SignInCode()
 		system("CLS");
 		b.AdminMode();
 	}
-	else if (db.PassVal1(t1) == checkFirstName && db.PassVal2(t2) == checkLastName && checkBankPin == 123123)
-	{
-		cout << "GOT IN" << endl;
-		b.MainMenu();
-	}
 
 	else
 	{
@@ -103,6 +96,7 @@ void Function::SignInCode()
 			cout << "Wrong Entry" << endl;
 		}
 	}
+	
 	cout << "*********************************************" << endl;
 	cout << "********************Sign In******************" << endl;
 }
@@ -178,14 +172,17 @@ void Function::PrintName()
 	cout << "Welcome " << firstName + " " + lastName + "\n";
 }
 
-string Function::PassFirstName(string fname)
-{
-	return firstName;
-}
 
-string Function::PassLastName(string lname)
+string Function::PassValueOption(string value, int option)
 {
-	return lastName;
+	if (option == 1)
+		return firstName;
+	if (option == 2)
+		return lastName;
+	if (option == 3)
+		return checkFirstName;
+	if (option == 4)
+		return checkLastName;
 }
 
 int Function::PassBankPin(int bpin)
@@ -193,14 +190,7 @@ int Function::PassBankPin(int bpin)
 	return bankPin;
 }
 
-string Function::PassCheckFN(string checkfirstname)
+int Function::PassCheckBankPin(int checkbpin)
 {
-	return checkFirstName;
+	return checkBankPin;
 }
-
-string Function::PassCheckLN(string checklastname)
-{
-	return checkLastName;
-}
-
-

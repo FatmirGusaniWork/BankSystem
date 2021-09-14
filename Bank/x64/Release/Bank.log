@@ -1,9 +1,8 @@
-﻿  Bank.cpp
-  Function.cpp
-  UserDB.cpp
+﻿  UserDB.cpp
   Generating code
-  30 of 232 functions (12.9%) were compiled, the rest were copied from previous compilation.
-    7 functions were new in current compilation
-    25 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\Function.cpp(186): warning C4715: 'Function::PassValueOption': not all control paths return a value
+C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\Function.cpp(168): warning C4715: 'Function::EnterPin': not all control paths return a value
+  All 225 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Bank.vcxproj -> C:\Users\Fatmir\source\repos\FatmirGusaniWork\x64\Release\Bank.exe
