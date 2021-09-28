@@ -19,6 +19,8 @@ string firstName;
 string lastName;
 string test;
 
+string testpass;
+
 
 int checkBankPin;
 int bankPin;
@@ -35,7 +37,7 @@ void Function::SignUpCode()
 
 	cout << "Enter First Name : ";
 	cin >> firstName;
-	
+
 	cout << "Enter Last Name : ";
 	cin >> lastName;
 
@@ -64,7 +66,6 @@ void Function::SignInCode()
 	cin >> checkLastName;
 
 	EnterPin(test, 2);
-
 	db.DatabaseOption(5);
 
 
@@ -73,7 +74,6 @@ void Function::SignInCode()
 		system("CLS");
 		b.AdminMode();
 	}
-
 	else
 	{
 		//system("CLS");
@@ -96,7 +96,7 @@ void Function::SignInCode()
 			cout << "Wrong Entry" << endl;
 		}
 	}
-	
+
 	cout << "*********************************************" << endl;
 	cout << "********************Sign In******************" << endl;
 }
@@ -135,11 +135,11 @@ int Function::EnterPin(string test, int whichfunction)
 	if (test.length() == 6)
 	{
 		bool b = false;
-		if (!test.empty() && std::all_of(test.begin(), test.end(), [](char c) {return std::isdigit(c); })) 
+		if (!test.empty() && std::all_of(test.begin(), test.end(), [](char c) {return std::isdigit(c); }))
 		{
 			b = true;
 			stringstream convert(test);
-			if(whichfunction == 1)
+			if (whichfunction == 1)
 				convert >> bankPin;
 			if (whichfunction == 2)
 				convert >> checkBankPin;
@@ -169,7 +169,7 @@ int Function::EnterPin(string test, int whichfunction)
 
 void Function::PrintName()
 {
-	cout << "Welcome " << firstName + " " + lastName + "\n";
+		cout << "Welcome " << firstName + " " + lastName + "\n";	
 }
 
 

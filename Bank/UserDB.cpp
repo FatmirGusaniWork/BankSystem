@@ -28,6 +28,9 @@ int money;
 int bankID;
 string getID;
 
+//string rowValue1;
+//string rowValue2;
+
 void UserDB::DatabaseOption(int option)
 {
     Function f;
@@ -106,6 +109,9 @@ void UserDB::DatabaseOption(int option)
                     cout << "Last name: " << row[2] << endl;
                     cout << "Bank Pin: " << row[3] << endl;
                     cout << "Money " << row[4] << endl;
+
+                    cout << "TEST THIS ROW : " << row[2][0] << endl;
+
                 }
             }
         }
@@ -189,9 +195,11 @@ void UserDB::DatabaseOption(int option)
 
         if (conn)
         {
+            char* val0;
             char* val1;
             char* val2;
             char* val3;
+            char* val4;
 
             qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
 
@@ -204,10 +212,13 @@ void UserDB::DatabaseOption(int option)
                     string rowValue1;
                     string rowValue2;
                     
+                    val0 = row[0];
                     val1 = row[1];
                     val2 = row[2];
                     val3 = row[3];
+                    val4 = row[4];
 
+                    //cout << "TEST THIS ROW : " <<  row[1][1] << endl;
                     stringstream s1;
                     s1 << val1;
                     s1 >> rowValue1;
@@ -216,13 +227,22 @@ void UserDB::DatabaseOption(int option)
                     s2 << val2;
                     s2 >> rowValue2;
 
+                    bankID = atoi(val0);
                     int rowValue3 = atoi(val3);
+                    money = atoi(val4);
+                    //b.PassBalance(atoi(val4));
 
+                    //cout << atoi(val4) << endl;
+                    
                     if(rowValue1 == f.PassValueOption(checkfname, 3) && rowValue2 == f.PassValueOption(checklname, 4) && f.PassCheckBankPin(checkbpin) == rowValue3)
                     {
-                            cout << "WE GOT IN" << endl;
-                            b.MainMenu();
+                        //bankID == rowValue0;
+                        cout << "WE GOT IN" << endl;
+                        //cout << rowValue0 << endl;
+                        b.MainMenu();
                     }
+
+                    
                 }
             }
         }
@@ -241,18 +261,9 @@ int UserDB::PassBankID(int ID)
     return bankID;
 }
 
-
-/*
-
-char* UserDB::PassVal1(string passVal1)
+int UserDB::PassMoney(int mon)
 {
-    return val;
+    return money;
 }
 
 
-char* UserDB::PassVal2(string passVal2)
-{
-    return val2;
-}
-
-*/

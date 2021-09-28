@@ -28,6 +28,8 @@ void Bank::MainMenu()
 	system("CLS");
 
 	f.PrintName();
+	db.PassMoney(balance);
+
 	cout << "Bank ID Number : " << db.PassBankID(getBankID) << endl;
 	cout << "Balance : " << balance << endl;
 
