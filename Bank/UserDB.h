@@ -9,6 +9,9 @@ public:
 	void DatabaseOption(int option);
 	int PassBankID(int ID);
 	int PassMoney(int mon);
+	string PassDataFN(string dataFN);
+	string PassDataLN(string dataLN);
+	void DataPrintName();
 	//string test(string testvalue);
 };
 

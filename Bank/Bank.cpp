@@ -20,14 +20,21 @@ int amount;
 int balance;
 int getBankID;
 
+int PO;
+
 void Bank::MainMenu()
 {
 	Function f;
 	UserDB db;
 
 	system("CLS");
+	f.PrintO(PO);
 
-	f.PrintName();
+	if(PO = 1)
+		f.PrintName();
+	if (PO = 2)
+		db.DataPrintName();
+
 	db.PassMoney(balance);
 
 	cout << "Bank ID Number : " << db.PassBankID(getBankID) << endl;

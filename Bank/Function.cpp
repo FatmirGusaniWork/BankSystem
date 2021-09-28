@@ -21,10 +21,11 @@ string test;
 
 string testpass;
 
-
 int checkBankPin;
 int bankPin;
 int tryAgain;
+
+int PrintOption;
 
 UserDB db;
 Bank b;
@@ -32,6 +33,8 @@ Function f;
 
 void Function::SignUpCode()
 {
+	PrintOption = 1;
+
 	cout << "*********************************************" << endl;
 	cout << "********************Sign Up******************" << endl;
 
@@ -55,6 +58,7 @@ void Function::SignUpCode()
 
 void Function::SignInCode()
 {
+	PrintOption = 2;
 	int tryAgain;
 	cout << "*********************************************" << endl;
 	cout << "********************Sign In******************" << endl;
@@ -169,7 +173,9 @@ int Function::EnterPin(string test, int whichfunction)
 
 void Function::PrintName()
 {
-		cout << "Welcome " << firstName + " " + lastName + "\n";	
+	//db.PassDataFN(firstName);
+	//db.PassDataLN(lastName);
+	cout << "Welcome " << firstName + " " + lastName + "\n";	
 }
 
 
@@ -193,4 +199,9 @@ int Function::PassBankPin(int bpin)
 int Function::PassCheckBankPin(int checkbpin)
 {
 	return checkBankPin;
+}
+
+int Function::PrintO(int checkbpin)
+{
+	return PrintOption;
 }

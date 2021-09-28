@@ -28,8 +28,8 @@ int money;
 int bankID;
 string getID;
 
-//string rowValue1;
-//string rowValue2;
+string rowValue1;
+string rowValue2;
 
 void UserDB::DatabaseOption(int option)
 {
@@ -111,7 +111,6 @@ void UserDB::DatabaseOption(int option)
                     cout << "Money " << row[4] << endl;
 
                     cout << "TEST THIS ROW : " << row[2][0] << endl;
-
                 }
             }
         }
@@ -127,7 +126,6 @@ void UserDB::DatabaseOption(int option)
         /////////////// SEARCH ///////////////
         if (conn)
         {
-
             string searchName;
             cout << "Enter Search Name : ";
             cin >> searchName;
@@ -209,8 +207,8 @@ void UserDB::DatabaseOption(int option)
 
                 while (row = mysql_fetch_row(res))
                 {
-                    string rowValue1;
-                    string rowValue2;
+                    //string rowValue1;
+                    //string rowValue2;
                     
                     val0 = row[0];
                     val1 = row[1];
@@ -265,5 +263,14 @@ int UserDB::PassMoney(int mon)
 {
     return money;
 }
+
+
+void UserDB::DataPrintName()
+{
+    cout << "Welcome " << rowValue1 + " " + rowValue2 + "\n";
+}
+
+
+
 
 
