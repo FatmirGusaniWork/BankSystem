@@ -94,7 +94,7 @@ void Function::SignInCode()
 			SignUpCode();
 			break;
 		case 3:
-			exit(0);
+			PickOption();
 			break;
 		default:
 			cout << "Wrong Entry" << endl;
@@ -110,7 +110,7 @@ void Function::PickOption()
 	//Register r;
 	int option;
 	cout << "Wellcome, please pick one of the options available" << endl;
-	cout << "1 : Sign In. \n2 : Sign Up." << endl;
+	cout << "1 : Sign In. \n2 : Sign Up. \n3 : Exit Program. \n" << endl;
 	cout << "Option : ";
 
 	cin >> option;
@@ -125,6 +125,8 @@ void Function::PickOption()
 	case 2:
 		SignUpCode();
 		break;
+	case 3:
+		exit(0);
 	default:
 		cout << "Wrong Entery, Try Again" << endl;
 		PickOption();
@@ -173,9 +175,10 @@ int Function::EnterPin(string test, int whichfunction)
 
 void Function::PrintName()
 {
-	//db.PassDataFN(firstName);
-	//db.PassDataLN(lastName);
-	cout << "Welcome " << firstName + " " + lastName + "\n";	
+	if(PrintOption == 1)
+		cout << "Welcome " << firstName + " " + lastName + "\n";
+	if(PrintOption == 2)
+		cout << "Welcome " << checkFirstName + " " + checkLastName + "\n";
 }
 
 
@@ -199,9 +202,4 @@ int Function::PassBankPin(int bpin)
 int Function::PassCheckBankPin(int checkbpin)
 {
 	return checkBankPin;
-}
-
-int Function::PrintO(int checkbpin)
-{
-	return PrintOption;
 }

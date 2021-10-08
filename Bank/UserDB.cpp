@@ -26,7 +26,7 @@ int bpin;
 
 int money;
 int bankID;
-string getID;
+int test;
 
 string rowValue1;
 string rowValue2;
@@ -109,8 +109,6 @@ void UserDB::DatabaseOption(int option)
                     cout << "Last name: " << row[2] << endl;
                     cout << "Bank Pin: " << row[3] << endl;
                     cout << "Money " << row[4] << endl;
-
-                    cout << "TEST THIS ROW : " << row[2][0] << endl;
                 }
             }
         }
@@ -167,11 +165,13 @@ void UserDB::DatabaseOption(int option)
         {
             ///bankID not linked//
             stringstream ss;
-            int ch;
-            cin >> ch;
-            cout << "TESTING : " << bankID << endl;
-            ss << "UPDATE bankuser.details SET money = " << b.PassBalance(money) << " WHERE id = " << ch;
-
+            //int ch;
+           // cin >> ch;
+            //b.PassBalance(money);
+            cout << "TESTING : " << test << endl;
+            Sleep(3000);
+            ss << "UPDATE bankuser.details SET money = " << b.PassBalance(money) << " WHERE id = " << test;
+            cout << " U " << money << endl;
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
@@ -207,16 +207,12 @@ void UserDB::DatabaseOption(int option)
 
                 while (row = mysql_fetch_row(res))
                 {
-                    //string rowValue1;
-                    //string rowValue2;
-                    
                     val0 = row[0];
                     val1 = row[1];
                     val2 = row[2];
                     val3 = row[3];
                     val4 = row[4];
 
-                    //cout << "TEST THIS ROW : " <<  row[1][1] << endl;
                     stringstream s1;
                     s1 << val1;
                     s1 >> rowValue1;
@@ -226,21 +222,16 @@ void UserDB::DatabaseOption(int option)
                     s2 >> rowValue2;
 
                     bankID = atoi(val0);
+                    test = bankID;
                     int rowValue3 = atoi(val3);
                     money = atoi(val4);
-                    //b.PassBalance(atoi(val4));
 
-                    //cout << atoi(val4) << endl;
-                    
+                    b.PassBalance(money);
+
                     if(rowValue1 == f.PassValueOption(checkfname, 3) && rowValue2 == f.PassValueOption(checklname, 4) && f.PassCheckBankPin(checkbpin) == rowValue3)
                     {
-                        //bankID == rowValue0;
-                        cout << "WE GOT IN" << endl;
-                        //cout << rowValue0 << endl;
                         b.MainMenu();
                     }
-
-                    
                 }
             }
         }
@@ -261,15 +252,9 @@ int UserDB::PassBankID(int ID)
 
 int UserDB::PassMoney(int mon)
 {
+    
     return money;
 }
-
-
-void UserDB::DataPrintName()
-{
-    cout << "Welcome " << rowValue1 + " " + rowValue2 + "\n";
-}
-
 
 
 

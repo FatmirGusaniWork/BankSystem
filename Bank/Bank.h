@@ -11,6 +11,9 @@ public:
 	int PassBalance(int balance);
 	void EnterBalance();
 	void AdminMode();
+
+
+	void prBal();
 };
 
 #endif

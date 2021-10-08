@@ -15,7 +15,6 @@ public:
 	string PassValueOption(string value, int option);
 	int PassBankPin(int bpin);
 	int PassCheckBankPin(int checkbpin);
-	int PrintO(int checkbpin);
 };
 
 #endif

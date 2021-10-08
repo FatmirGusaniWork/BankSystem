@@ -26,19 +26,23 @@ void Bank::MainMenu()
 {
 	Function f;
 	UserDB db;
-
+	/*
+	Function f;
+	UserDB db;
 	system("CLS");
-	f.PrintO(PO);
 
-	if(PO = 1)
-		f.PrintName();
-	if (PO = 2)
-		db.DataPrintName();
+	f.PrintName();
 
-	db.PassMoney(balance);
+	//db.PassMoney(balance);
 
 	cout << "Bank ID Number : " << db.PassBankID(getBankID) << endl;
-	cout << "Balance : " << balance << endl;
+	//cout << "Balance : " << balance << endl;
+	cout << "Balance : " << db.PassMoney(balance) << endl;
+	cout << balance << endl;
+
+	*/
+	prBal();
+
 
 	cout << "Please pick one of the options available" << endl;
 	cout << "1 : Withdrawal. \n2 : Deposit.\n3 : Statement.\n4 : Sign Out.\n" << endl;
@@ -64,6 +68,7 @@ void Bank::MainMenu()
 			cout << "Withdraw Successful" << endl;
 			db.DatabaseOption(4);
 			cout << "New Balance : " << balance << endl;
+			PassBalance(balance);
 		}
 		else
 		{
@@ -93,6 +98,8 @@ void Bank::MainMenu()
 		cout << "Doposit Successfully, ";
 		db.DatabaseOption(4);
 		cout << "New Balance : " << balance << endl;
+		PassBalance(balance);
+
 
 		Sleep(3000);
 		system("CLS");
@@ -208,4 +215,18 @@ void Bank::EnterBalance()
 int Bank::PassBalance(int bal)
 {
 	return balance;
+}
+
+void Bank::prBal()
+{
+	Function f;
+	UserDB db;
+	system("CLS");
+
+	f.PrintName();
+	
+	cout << "Bank ID Number : " << db.PassBankID(getBankID) << endl;
+	cout << "Balance : " << db.PassMoney(balance) << endl;
+
+	cout << "TEST BAL : " << balance << endl;
 }
