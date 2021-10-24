@@ -26,22 +26,12 @@ void Bank::MainMenu()
 {
 	Function f;
 	UserDB db;
-	/*
-	Function f;
-	UserDB db;
 	system("CLS");
 
 	f.PrintName();
 
-	//db.PassMoney(balance);
-
 	cout << "Bank ID Number : " << db.PassBankID(getBankID) << endl;
-	//cout << "Balance : " << balance << endl;
-	cout << "Balance : " << db.PassMoney(balance) << endl;
-	cout << balance << endl;
-
-	*/
-	prBal();
+	cout << "Balance : " << balance << endl;
 
 
 	cout << "Please pick one of the options available" << endl;
@@ -213,20 +203,11 @@ void Bank::EnterBalance()
 }
 
 int Bank::PassBalance(int bal)
-{
+{	
 	return balance;
 }
 
-void Bank::prBal()
+void Bank::PassBalanceDetails(int &cash)
 {
-	Function f;
-	UserDB db;
-	system("CLS");
-
-	f.PrintName();
-	
-	cout << "Bank ID Number : " << db.PassBankID(getBankID) << endl;
-	cout << "Balance : " << db.PassMoney(balance) << endl;
-
-	cout << "TEST BAL : " << balance << endl;
+	balance = cash;
 }

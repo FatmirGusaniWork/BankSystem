@@ -25,8 +25,10 @@ string lname;
 int bpin;
 
 int money;
+int tempMoney;
 int bankID;
-int test;
+int testBankID;
+int testMoney;
 
 string rowValue1;
 string rowValue2;
@@ -168,10 +170,7 @@ void UserDB::DatabaseOption(int option)
             //int ch;
            // cin >> ch;
             //b.PassBalance(money);
-            cout << "TESTING : " << test << endl;
-            Sleep(3000);
-            ss << "UPDATE bankuser.details SET money = " << b.PassBalance(money) << " WHERE id = " << test;
-            cout << " U " << money << endl;
+            ss << "UPDATE bankuser.details SET money = " << b.PassBalance(money) << " WHERE id = " << testBankID;
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
@@ -222,11 +221,13 @@ void UserDB::DatabaseOption(int option)
                     s2 >> rowValue2;
 
                     bankID = atoi(val0);
-                    test = bankID;
+                    testBankID = bankID;
+
+                    //test = bankID;
                     int rowValue3 = atoi(val3);
                     money = atoi(val4);
-
-                    b.PassBalance(money);
+                    testMoney = money;
+                    b.PassBalanceDetails(money);
 
                     if(rowValue1 == f.PassValueOption(checkfname, 3) && rowValue2 == f.PassValueOption(checklname, 4) && f.PassCheckBankPin(checkbpin) == rowValue3)
                     {
@@ -247,14 +248,15 @@ void UserDB::DatabaseOption(int option)
 
 int UserDB::PassBankID(int ID)
 {
-    return bankID;
+    return testBankID;
 }
 
 int UserDB::PassMoney(int mon)
 {
-    
+  
     return money;
 }
+
 
 
 

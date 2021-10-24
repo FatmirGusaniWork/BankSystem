@@ -9,6 +9,7 @@ public:
 	void DatabaseOption(int option);
 	int PassBankID(int ID);
 	int PassMoney(int mon);
+	int TestMoneyPass(int cash);
 };
 
 #endif

@@ -80,7 +80,7 @@ void Function::SignInCode()
 	}
 	else
 	{
-		//system("CLS");
+		system("CLS");
 		cout << "SIGN IN FAILED, Try Again" << endl;
 
 		cout << "1 : Try Again\n2 : Sign Up\n3 : EXIT" << endl;
@@ -88,12 +88,15 @@ void Function::SignInCode()
 		switch (tryAgain)
 		{
 		case 1:
+			system("CLS");
 			SignInCode();
 			break;
 		case 2:
+			system("CLS");
 			SignUpCode();
 			break;
 		case 3:
+			system("CLS");
 			PickOption();
 			break;
 		default:
