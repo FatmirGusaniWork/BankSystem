@@ -20,6 +20,11 @@ int amount;
 int balance;
 int getBankID;
 
+string transferFName;
+string transforLName;
+int transforBankID;
+int transforAmount;
+
 int PO;
 
 void Bank::MainMenu()
@@ -35,7 +40,7 @@ void Bank::MainMenu()
 
 
 	cout << "Please pick one of the options available" << endl;
-	cout << "1 : Withdrawal. \n2 : Deposit.\n3 : Statement.\n4 : Sign Out.\n" << endl;
+	cout << "1 : Withdrawal. \n2 : Deposit.\n3 : Statement.\n4 : Send Money\n5 : Sign Out\n" << endl;
 	cout << "Option : ";
 	
 	cin >> option;
@@ -103,6 +108,11 @@ void Bank::MainMenu()
 
 	case 4:
 		system("CLS");
+		TransferMoney();
+		break;
+
+	case 5:
+		system("CLS");
 		f.PickOption();
 		break;
 
@@ -133,11 +143,13 @@ void Bank::AdminMode()
 	case 1:
 		system("CLS");
 		db.DatabaseOption(2);
+		AdminMode();
 		break;
 	case 2:
 		system("CLS");
 		db.DatabaseOption(3);
 		Sleep(5000);
+		AdminMode();
 		break;
 
 	case 3:
@@ -207,7 +219,60 @@ int Bank::PassBalance(int bal)
 	return balance;
 }
 
+void Bank::PassTransforBalance(int &Tbal)
+{
+	 balance = Tbal;
+}
+
+int Bank::PassTransforBankID(int TBankID)
+{
+	return balance;
+}
+
+string Bank::PassTransforValue(string value, int option)
+{
+	if (option == 1)
+		return transferFName;
+	if (option == 2)
+		return transforLName;
+}
+
+
+
 void Bank::PassBalanceDetails(int &cash)
 {
 	balance = cash;
+}
+
+void Bank::TransferMoney()
+{
+	UserDB db;
+
+	string transferFName;
+	string transforLName;
+	int transforBankID;
+	int transforAmount;
+
+
+	//cout << "Enter First Name : ";
+	//cin >> transferFName;
+	//cout << "Enter Last Name : ";
+	//cin >> transforLName;
+
+	cout << "Enter Bank ID : ";
+	cin >> transforBankID;
+
+	cout << "Enter Amount : ";
+	cin >>  transforAmount;
+
+	if (balance - transforAmount >= 0)
+	{
+		cout << "Transfor Complete.";
+		balance - transforAmount;
+		db.DatabaseOption(6);
+	}
+	else
+	{
+		cout << "Transfor Failed. Not Enought Funds";
+	}
 }

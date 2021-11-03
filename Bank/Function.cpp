@@ -7,10 +7,10 @@ using namespace std;
 #include <sstream>
 #include <stdlib.h>
 #include <windows.h>
-#include <algorithm>
 #include "Function.h"
 #include "UserDB.h"
 #include "Bank.h"
+#include <algorithm>
 #undef max
 
 string checkFirstName;
@@ -70,13 +70,16 @@ void Function::SignInCode()
 	cin >> checkLastName;
 
 	EnterPin(test, 2);
+
 	db.DatabaseOption(5);
 
+	//this is a problem
 
 	if (checkFirstName == "Admin" && checkLastName == "Mode" && checkBankPin == 0)
 	{
 		system("CLS");
 		b.AdminMode();
+		
 	}
 	else
 	{

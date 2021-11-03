@@ -28,7 +28,13 @@ int money;
 int tempMoney;
 int bankID;
 int testBankID;
-int testMoney;
+//int testMoney;
+
+string transforFN;
+string transforLN;
+int transforID;
+int transforMoney;
+
 
 string rowValue1;
 string rowValue2;
@@ -127,12 +133,13 @@ void UserDB::DatabaseOption(int option)
         if (conn)
         {
             string searchName;
+
             cout << "Enter Search Name : ";
             cin >> searchName;
 
             stringstream ss;
 
-            ss << "SELECT * FROM bankuser.details WHERE firstname = " << searchName;
+            ss << "SELECT * FROM bankuser.details WHERE firstname = '" << searchName << "'";
 
             string query = ss.str();
             const char* q = query.c_str();
@@ -189,7 +196,6 @@ void UserDB::DatabaseOption(int option)
         break;
 
     case 5:
-
         if (conn)
         {
             char* val0;
@@ -226,10 +232,51 @@ void UserDB::DatabaseOption(int option)
                     //test = bankID;
                     int rowValue3 = atoi(val3);
                     money = atoi(val4);
-                    testMoney = money;
+                    //testMoney = money;
                     b.PassBalanceDetails(money);
 
-                    if(rowValue1 == f.PassValueOption(checkfname, 3) && rowValue2 == f.PassValueOption(checklname, 4) && f.PassCheckBankPin(checkbpin) == rowValue3)
+                    if (rowValue1 == f.PassValueOption(checkfname, 3) && rowValue2 == f.PassValueOption(checklname, 4) && f.PassCheckBankPin(checkbpin) == rowValue3)
+                    {
+                        b.MainMenu();
+                    }
+                }
+            }
+        }
+
+        else
+        {
+            cout << " Connection failure" << endl;
+        }
+
+        break;
+
+    case 6:
+        /////////////// TRANSFOR ///////////////
+        if (conn)
+        {
+            char* val0;
+            char* val4;
+
+            qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
+
+            if (!qstate)
+            {
+                res = mysql_store_result(conn);
+
+                while (row = mysql_fetch_row(res))
+                {
+                    val0 = row[0];
+                   
+                    val4 = row[4];
+
+                    bankID = atoi(val0);
+                    testBankID = bankID;
+
+                    money = atoi(val4);
+                    //testMoney = money;
+                    b.PassBalanceDetails(money);
+
+                    if (bankID == b.PassTransforBankID(transforID))
                     {
                         b.MainMenu();
                     }
@@ -244,6 +291,7 @@ void UserDB::DatabaseOption(int option)
 
         break;
     }
+
 }
 
 int UserDB::PassBankID(int ID)
