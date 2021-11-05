@@ -166,7 +166,11 @@ void UserDB::DatabaseOption(int option)
         /////////////// UPDATE ///////////////
         if (conn)
         {
+            ///bankID not linked//
             stringstream ss;
+            //int ch;
+           // cin >> ch;
+            //b.PassBalance(money);
             ss << "UPDATE bankuser.details SET money = " << b.PassBalance(money) << " WHERE id = " << testBankID;
             string query = ss.str();
             const char* q = query.c_str();
@@ -194,6 +198,9 @@ void UserDB::DatabaseOption(int option)
             char* val3;
             char* val4;
             stringstream ss;
+            //int ch;
+           // cin >> ch;
+            //b.PassBalance(money);
             ss << "SELECT * FROM bankuser.details";
             string query = ss.str();
             const char* q = query.c_str();
@@ -260,6 +267,8 @@ void UserDB::DatabaseOption(int option)
             cin >> transforAmount;
 
             stringstream ss;
+            //qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
+
             ss << "UPDATE bankuser.details SET money = " << transforAmount << " WHERE id = '" << transforBankID << "'";
 
             string query = ss.str();

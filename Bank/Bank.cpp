@@ -221,23 +221,13 @@ int Bank::PassBalance(int bal)
 
 void Bank::PassTransforBalance(int &Tbal)
 {
-	 balance = Tbal;
+	transforAmount = Tbal;
 }
 
-int Bank::PassTransforBankID(int TBankID)
+void Bank::PassTransforBankID(int &TBankID)
 {
-	return balance;
+	transforBankID = TBankID;
 }
-
-string Bank::PassTransforValue(string value, int option)
-{
-	if (option == 1)
-		return transferFName;
-	if (option == 2)
-		return transforLName;
-}
-
-
 
 void Bank::PassBalanceDetails(int &cash)
 {
@@ -247,32 +237,5 @@ void Bank::PassBalanceDetails(int &cash)
 void Bank::TransferMoney()
 {
 	UserDB db;
-
-	string transferFName;
-	string transforLName;
-	int transforBankID;
-	int transforAmount;
-
-
-	//cout << "Enter First Name : ";
-	//cin >> transferFName;
-	//cout << "Enter Last Name : ";
-	//cin >> transforLName;
-
-	cout << "Enter Bank ID : ";
-	cin >> transforBankID;
-
-	cout << "Enter Amount : ";
-	cin >>  transforAmount;
-
-	if (balance - transforAmount >= 0)
-	{
-		cout << "Transfor Complete.";
-		balance - transforAmount;
-		db.DatabaseOption(6);
-	}
-	else
-	{
-		cout << "Transfor Failed. Not Enought Funds";
-	}
+	db.DatabaseOption(6);
 }
