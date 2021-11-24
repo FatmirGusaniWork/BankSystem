@@ -241,7 +241,6 @@ void UserDB::DatabaseOption(int option)
         {
             cout << " Connection failure" << endl;
         }
-
         break;
 
     case 6:
@@ -250,8 +249,6 @@ void UserDB::DatabaseOption(int option)
         {
             int transforBankID;
             int transforAmount;
-            char* val0;
-            char* val4;
 
             cout << "Enter Bank ID : ";
             cin >> transforBankID;
@@ -260,7 +257,7 @@ void UserDB::DatabaseOption(int option)
             cin >> transforAmount;
 
             stringstream ss;
-            ss << "UPDATE bankuser.details SET money = " << transforAmount << " WHERE id = '" << transforBankID << "'";
+            ss << "SELECT * FROM bankuser.details WHERE id = '" << transforBankID << "'";
 
             string query = ss.str();
             const char* q = query.c_str();
@@ -269,30 +266,6 @@ void UserDB::DatabaseOption(int option)
             if (!qstate)
             {
                 res = mysql_store_result(conn);
-
-                while (row = mysql_fetch_row(res))
-                {
-                    val0 = row[0];
-                    val4 = row[4];
-
-                    bankID = atoi(val0);
-                    testBankID = bankID;
-
-                  
-                    //test = bankID;
-                    int tempmoney;
-                    tempmoney = atoi(val4);
-                    //testMoney = money;
-
-
-                    if (transforBankID == testBankID)
-                    {
-                        transforAmount += tempmoney;
-                         //ss << "UPDATE bankuser.details SET money = " << transforAmount << " WHERE id = '" << transforBankID << "'";
-                        b.MainMenu();
-                    }
-                }
-                
             }
         }
 
@@ -302,7 +275,6 @@ void UserDB::DatabaseOption(int option)
         }
 
         break;
-
     }
 }
 
