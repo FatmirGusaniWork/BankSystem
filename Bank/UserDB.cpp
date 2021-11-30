@@ -29,10 +29,6 @@ int tempMoney;
 int bankID;
 int testBankID;
 
-int transforID;
-int transforMoney;
-
-
 string rowValue1;
 string rowValue2;
 
@@ -45,12 +41,12 @@ void UserDB::DatabaseOption(int option)
 
     //int bankID = rand() % 9000 + 100000;
 
-    
+
     for (int index = 0; index < 1; index++) {
         bankID = 100000 + (rand() % 10000000) + 1;
         //cout << "Bank ID : " << bankID << endl;
     }
-    
+
 
     MYSQL* conn;
     MYSQL_ROW row;
@@ -248,16 +244,11 @@ void UserDB::DatabaseOption(int option)
         /////////////// TRANSFOR ///////////////
         if (conn)
         {
-            int transforBankID;
-            int transforAmount;
+            int PTbankID;
+            int PTcash;
+
             char* val0;
             char* val4;
-
-            cout << "Enter Bank ID : ";
-            cin >> transforBankID;
-
-            cout << "Enter Amount : ";
-            cin >> transforAmount;
 
             stringstream ss;
             ss << "SELECT * FROM bankuser.details";
@@ -285,12 +276,12 @@ void UserDB::DatabaseOption(int option)
                     //testMoney = money;
 
 
-                    if (transforBankID == bankID)
+                    if (b.PassTBankID(PTbankID) == bankID)
                     {
-                        tempmoney += transforAmount;
+                        //tempmoney += b.PassTCash(PTcash);
 
                         stringstream ss;
-                        ss << "UPDATE bankuser.details SET money = '" << tempmoney << "' WHERE id = '" << transforBankID << "'";
+                        ss << "UPDATE bankuser.details SET money = '" << tempmoney << "' WHERE id = '" << b.PassTBankID(PTbankID) << "'";
 
                         string query = ss.str();
                         const char* q = query.c_str();
@@ -300,14 +291,6 @@ void UserDB::DatabaseOption(int option)
                         {
                             res = mysql_store_result(conn);
                         }
-
-
-                        cout << " TEST MONEY : " << tempmoney << " TEST BANKID : " << bankID;
-                        Sleep(2000);
-                        tempmoney += transforAmount;
-
-                        cout << " TEST MONEY : " << tempmoney << " TEST BANKID : " << bankID;
-                        
 
                         //Sleep(4000);
                         //ss << "UPDATE bankuser.details SET money = " << transforAmount << " WHERE id = '" << transforBankID << "'";
@@ -334,12 +317,5 @@ int UserDB::PassBankID(int ID)
 
 int UserDB::PassMoney(int mon)
 {
-  
     return money;
 }
-
-
-
-
-
-

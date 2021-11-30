@@ -14,8 +14,9 @@ public:
 	void PassBalanceDetails(int &cash);
 	void TransferMoney();
 
-	void PassTransforBalance(int &Tbal);
-	void PassTransforBankID(int &TbankID);
+	int PassTBankID(int Tid);
+	int PassTCash(int Tcash);
+
 };
 
 #endif

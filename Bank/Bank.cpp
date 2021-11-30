@@ -19,11 +19,8 @@ int option;
 int amount;
 int balance;
 int getBankID;
-
-string transferFName;
-string transforLName;
 int transforBankID;
-int transforAmount;
+int transforCash;
 
 int PO;
 
@@ -42,7 +39,7 @@ void Bank::MainMenu()
 	cout << "Please pick one of the options available" << endl;
 	cout << "1 : Withdrawal. \n2 : Deposit.\n3 : Statement.\n4 : Send Money\n5 : Sign Out\n" << endl;
 	cout << "Option : ";
-	
+
 	cin >> option;
 
 	switch (option)
@@ -51,10 +48,10 @@ void Bank::MainMenu()
 		cout << "Enter withdraw amount : ";
 		while (!(cin >> amount))
 		{
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				cout << "Invalid Input" << endl;
-				cout << "Enter withdraw amount : " << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Invalid Input" << endl;
+			cout << "Enter withdraw amount : " << endl;
 		}
 
 		if (balance >= amount && amount > 0)
@@ -80,7 +77,7 @@ void Bank::MainMenu()
 	case 2:
 		cout << "Enter Deposit Amount : " << endl;
 
-		while (!(cin >> amount)) 
+		while (!(cin >> amount))
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -127,7 +124,7 @@ void Bank::MainMenu()
 void Bank::AdminMode()
 {
 	UserDB db;
-	
+
 	int adminOption;
 	cout << "***************************************************" << endl;
 	cout << "                Administrator Mode                 " << endl;
@@ -190,8 +187,8 @@ void Bank::EnterBalance()
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		EnterBalance();
 	}
-	
-	if(balance == 0)
+
+	if (balance == 0)
 	{
 		system("CLS");
 		f.PickOption();
@@ -215,21 +212,11 @@ void Bank::EnterBalance()
 }
 
 int Bank::PassBalance(int bal)
-{	
+{
 	return balance;
 }
 
-void Bank::PassTransforBalance(int &Tbal)
-{
-	transforAmount = Tbal;
-}
-
-void Bank::PassTransforBankID(int &TBankID)
-{
-	transforBankID = TBankID;
-}
-
-void Bank::PassBalanceDetails(int &cash)
+void Bank::PassBalanceDetails(int& cash)
 {
 	balance = cash;
 }
@@ -237,5 +224,33 @@ void Bank::PassBalanceDetails(int &cash)
 void Bank::TransferMoney()
 {
 	UserDB db;
-	db.DatabaseOption(6);
+
+	cout << "Enter Bank ID : ";
+	cin >> transforBankID;
+
+	cout << "Enter Amount : ";
+	cin >> transforCash;
+
+	if (balance >= transforCash && amount >= 0)
+	{
+		balance -= transforCash;
+		db.DatabaseOption(4);
+		db.DatabaseOption(6);
+	}
+	else
+	{
+		cout << "Transfor Failed...\nNot Enought Money";
+		Sleep(3000);
+		MainMenu();
+	}
+}
+
+int Bank::PassTBankID(int Tid)
+{
+	return transforBankID;
+}
+
+int Bank::PassTCash(int Tcash)
+{
+	return balance;
 }
