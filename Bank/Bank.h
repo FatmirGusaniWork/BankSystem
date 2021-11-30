@@ -15,7 +15,7 @@ public:
 	void TransferMoney();
 
 	int PassTBankID(int Tid);
-	int PassTCash(int Tcash);
+	void PassTCash(int &Tcash);
 
 };
 

@@ -250,7 +250,7 @@ int Bank::PassTBankID(int Tid)
 	return transforBankID;
 }
 
-int Bank::PassTCash(int Tcash)
+void Bank::PassTCash(int &Tcash)
 {
-	return balance;
+	Tcash = transforCash;
 }

@@ -278,7 +278,11 @@ void UserDB::DatabaseOption(int option)
 
                     if (b.PassTBankID(PTbankID) == bankID)
                     {
-                        //tempmoney += b.PassTCash(PTcash);
+                        b.PassTCash(PTcash);
+                        tempmoney += PTcash;
+
+                        cout << " TEST : " << PTcash << endl;
+                        //Sleep(4000);
 
                         stringstream ss;
                         ss << "UPDATE bankuser.details SET money = '" << tempmoney << "' WHERE id = '" << b.PassTBankID(PTbankID) << "'";
