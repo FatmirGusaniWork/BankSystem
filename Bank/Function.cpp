@@ -182,9 +182,10 @@ int Function::EnterPin(string test, int whichfunction)
 void Function::PrintName()
 {
 	if(PrintOption == 1)
-		cout << "Welcome " << firstName + " " + lastName + "\n";
+		cout << "                    " << firstName + " " + lastName + "\n";
+		
 	if(PrintOption == 2)
-		cout << "Welcome " << checkFirstName + " " + checkLastName + "\n";
+		cout << "                    " << checkFirstName + " " + checkLastName + "\n";
 }
 
 

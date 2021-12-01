@@ -12,11 +12,8 @@ public:
 	void EnterBalance();
 	void AdminMode();
 	void PassBalanceDetails(int &cash);
-	void TransferMoney();
-
 	int PassTBankID(int Tid);
 	void PassTCash(int &Tcash);
-
 };
 
 #endif

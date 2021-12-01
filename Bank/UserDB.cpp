@@ -102,11 +102,13 @@ void UserDB::DatabaseOption(int option)
                 while (row = mysql_fetch_row(res))
                 {
                     cout << endl;
+                    cout << "********************" << endl;
                     cout << "ID : " << row[0] << endl;
                     cout << "First name: " << row[1] << endl;
                     cout << "Last name: " << row[2] << endl;
                     cout << "Bank Pin: " << row[3] << endl;
                     cout << "Money " << row[4] << endl;
+                    cout << "********************" << endl;
                 }
             }
         }
@@ -183,6 +185,7 @@ void UserDB::DatabaseOption(int option)
         break;
 
     case 5:
+        /////////////// LOG IN ///////////////
         if (conn)
         {
             char* val0;
@@ -241,7 +244,7 @@ void UserDB::DatabaseOption(int option)
         break;
 
     case 6:
-        /////////////// TRANSFOR ///////////////
+        /////////////// TRANSFER ///////////////
         if (conn)
         {
             int PTbankID;
@@ -269,20 +272,13 @@ void UserDB::DatabaseOption(int option)
                     bankID = atoi(val0);
                     testBankID = bankID;
 
-
-                    //test = bankID;
                     int tempmoney;
                     tempmoney = atoi(val4);
-                    //testMoney = money;
-
 
                     if (b.PassTBankID(PTbankID) == bankID)
                     {
                         b.PassTCash(PTcash);
                         tempmoney += PTcash;
-
-                        cout << " TEST : " << PTcash << endl;
-                        //Sleep(4000);
 
                         stringstream ss;
                         ss << "UPDATE bankuser.details SET money = '" << tempmoney << "' WHERE id = '" << b.PassTBankID(PTbankID) << "'";
@@ -295,13 +291,15 @@ void UserDB::DatabaseOption(int option)
                         {
                             res = mysql_store_result(conn);
                         }
-
-                        //Sleep(4000);
-                        //ss << "UPDATE bankuser.details SET money = " << transforAmount << " WHERE id = '" << transforBankID << "'";
+                        b.MainMenu();
+                    }
+                    else
+                    {
+                        cout << "Entered Bank ID does not exist, Try Again" << endl;
+                        Sleep(3000);
                         b.MainMenu();
                     }
                 }
-
             }
         }
 
