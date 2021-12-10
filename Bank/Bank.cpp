@@ -6,6 +6,11 @@ using namespace std;
 #include <iostream>
 //#include <sstream>
 //#include <limits>
+
+#include <fstream>  
+#include <filesystem>
+#include <direct.h>
+
 #include <stdlib.h>
 #include <windows.h>
 #include "Function.h"
@@ -38,8 +43,6 @@ void Bank::MainMenu()
 
 	cout << "Bank ID Number : " << db.PassBankID(getBankID) << endl;
 	cout << "Balance : " << balance << endl;
-
-
 	cout << "Please pick one of the options available" << endl;
 	cout << "1 : Withdrawal. \n2 : Deposit.\n3 : Statement.\n4 : Send Money\n5 : Sign Out\n" << endl;
 	cout << "Option : ";
@@ -67,9 +70,13 @@ void Bank::MainMenu()
 		{
 			balance -= amount;
 			cout << "Withdraw Successful" << endl;
+			
 			db.DatabaseOption(4);
 			cout << "New Balance : " << balance << endl;
+			Statement(1);
 			PassBalance(balance);
+			
+			
 		}
 		else
 		{
@@ -103,6 +110,7 @@ void Bank::MainMenu()
 		cout << "Doposit Successfully, ";
 		db.DatabaseOption(4);
 		cout << "New Balance : " << balance << endl;
+		Statement(2);
 		PassBalance(balance);
 
 
@@ -131,6 +139,7 @@ void Bank::MainMenu()
 		if (balance >= transferCash && amount >= 0)
 		{
 			balance -= transferCash;
+			//Statement(3);
 			db.DatabaseOption(4);
 			db.DatabaseOption(6);
 		}
@@ -259,4 +268,59 @@ int Bank::PassTBankID(int Tid)
 void Bank::PassTCash(int& Tcash)
 {
 	Tcash = transferCash;
+}
+
+void Bank::Statement(int pick)
+{	
+	UserDB db;
+	_mkdir("C://Users//Fatmir//source//repos//FatmirGusaniWork//Bank//BankID//");
+	const char* path = "C://Users//Fatmir//source//repos//FatmirGusaniWork//Bank//BankID//T1";
+	ofstream file(path);
+
+	if (pick == 1)
+	{
+		file << "\n**************************************************";
+		file << "WithDraw";
+		file << "**************************************************";
+		file << "\nBankID : " << db.PassBankID(getBankID);
+		file << "\nCurrent Balance : " << balance;
+		file << "\nAmount : " << amount;
+		file << "\nOld Balance : " << balance + amount;
+		file << "\n**************************************************";
+		file << "WithDraw";
+		file << "**************************************************\n";
+		file.close();
+	}
+
+	if (pick == 2)
+	{
+		file << "\n**************************************************";
+		file << "Deposit";
+		file << "**************************************************";
+		file << "\nBankID : " << db.PassBankID(getBankID);
+		file << "\nCurrent Balance : " << balance;
+		file << "\nAmount : " << amount;
+		file << "\nOld Balance : " << balance - amount;
+		file << "\n**************************************************";
+		file << "Deposit";
+		file << "**************************************************\n";
+		file.close();
+	}
+
+	if (pick == 3)
+	{
+		file << "\n**************************************************";
+		file << "Transfer";
+		file << "**************************************************";
+		file << "\nBankID : " << db.PassBankID(getBankID);
+		file << "\nCurrent Balance : " << balance;
+		file << "\nTransfer Amount : " << transferCash;
+		file << "\nOld Balance : " << balance - amount;
+		file << "\nTransfer BankID : " << transferBankID;
+		file << "\n**************************************************";
+		file << "Transfer";
+		file << "**************************************************\n";
+		file.close();
+	}
+		
 }

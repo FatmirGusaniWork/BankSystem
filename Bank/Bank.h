@@ -14,6 +14,7 @@ public:
 	void PassBalanceDetails(int &cash);
 	int PassTBankID(int Tid);
 	void PassTCash(int &Tcash);
+	void Statement(int pick);
 };
 
 #endif

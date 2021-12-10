@@ -275,6 +275,11 @@ void UserDB::DatabaseOption(int option)
                     int tempmoney;
                     tempmoney = atoi(val4);
 
+
+                    cout << b.PassTBankID(PTbankID) << endl;
+                    cout << bankID << endl;
+
+                    Sleep(4000);
                     if (b.PassTBankID(PTbankID) == bankID)
                     {
                         b.PassTCash(PTcash);
