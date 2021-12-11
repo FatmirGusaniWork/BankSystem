@@ -275,11 +275,6 @@ void UserDB::DatabaseOption(int option)
                     int tempmoney;
                     tempmoney = atoi(val4);
 
-
-                    cout << b.PassTBankID(PTbankID) << endl;
-                    cout << bankID << endl;
-
-                    Sleep(4000);
                     if (b.PassTBankID(PTbankID) == bankID)
                     {
                         b.PassTCash(PTcash);
@@ -297,13 +292,7 @@ void UserDB::DatabaseOption(int option)
                             res = mysql_store_result(conn);
                         }
                         b.MainMenu();
-                    }
-                    else
-                    {
-                        cout << "Entered Bank ID does not exist, Try Again" << endl;
-                        Sleep(3000);
-                        b.MainMenu();
-                    }
+                    }  
                 }
             }
         }
@@ -319,7 +308,7 @@ void UserDB::DatabaseOption(int option)
 
 int UserDB::PassBankID(int ID)
 {
-    return testBankID;
+    return bankID;
 }
 
 int UserDB::PassMoney(int mon)

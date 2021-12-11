@@ -70,13 +70,13 @@ void Bank::MainMenu()
 		{
 			balance -= amount;
 			cout << "Withdraw Successful" << endl;
-			
+
 			db.DatabaseOption(4);
 			cout << "New Balance : " << balance << endl;
 			Statement(1);
 			PassBalance(balance);
-			
-			
+
+
 		}
 		else
 		{
@@ -139,9 +139,9 @@ void Bank::MainMenu()
 		if (balance >= transferCash && amount >= 0)
 		{
 			balance -= transferCash;
-			//Statement(3);
 			db.DatabaseOption(4);
 			db.DatabaseOption(6);
+			Statement(3);
 		}
 		else
 		{
@@ -271,7 +271,7 @@ void Bank::PassTCash(int& Tcash)
 }
 
 void Bank::Statement(int pick)
-{	
+{
 	UserDB db;
 	_mkdir("C://Users//Fatmir//source//repos//FatmirGusaniWork//Bank//BankID//");
 	const char* path = "C://Users//Fatmir//source//repos//FatmirGusaniWork//Bank//BankID//T1";
@@ -322,5 +322,5 @@ void Bank::Statement(int pick)
 		file << "**************************************************\n";
 		file.close();
 	}
-		
+
 }
