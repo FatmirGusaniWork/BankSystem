@@ -1,8 +1,7 @@
-﻿  Bank.cpp
-  The contents of <filesystem> are available only with C++17 or later.
+﻿  UserDB.cpp
   Generating code
-  2 of 275 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
+  2 of 277 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    7 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Bank.vcxproj -> C:\Users\Fatmir\source\repos\FatmirGusaniWork\x64\Release\Bank.exe

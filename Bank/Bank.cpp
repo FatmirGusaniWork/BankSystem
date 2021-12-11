@@ -25,6 +25,7 @@ int amount;
 
 int balance;
 int getBankID;
+int BankID;
 
 int transferBankID;
 int transferCash;
@@ -40,8 +41,9 @@ void Bank::MainMenu()
 	f.PrintName();
 	cout << "**************************************************" << endl;
 	//f.PrintName();
+	db.PassABankID(BankID);
 
-	cout << "Bank ID Number : " << db.PassBankID(getBankID) << endl;
+	cout << "Bank ID Number : " << BankID << endl;
 	cout << "Balance : " << balance << endl;
 	cout << "Please pick one of the options available" << endl;
 	cout << "1 : Withdrawal. \n2 : Deposit.\n3 : Statement.\n4 : Send Money\n5 : Sign Out\n" << endl;
@@ -268,6 +270,11 @@ int Bank::PassTBankID(int Tid)
 void Bank::PassTCash(int& Tcash)
 {
 	Tcash = transferCash;
+}
+
+void Bank::ReturnBankID(int& ID)
+{
+	ID = BankID;
 }
 
 void Bank::Statement(int pick)

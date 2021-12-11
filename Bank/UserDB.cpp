@@ -28,6 +28,7 @@ int money;
 int tempMoney;
 int bankID;
 int testBankID;
+int tempBankID;
 
 string rowValue1;
 string rowValue2;
@@ -253,6 +254,7 @@ void UserDB::DatabaseOption(int option)
             char* val0;
             char* val4;
 
+            b.ReturnBankID(tempBankID);
             stringstream ss;
             ss << "SELECT * FROM bankuser.details";
 
@@ -270,7 +272,6 @@ void UserDB::DatabaseOption(int option)
                     val4 = row[4];
 
                     bankID = atoi(val0);
-                    testBankID = bankID;
 
                     int tempmoney;
                     tempmoney = atoi(val4);
@@ -291,6 +292,9 @@ void UserDB::DatabaseOption(int option)
                         {
                             res = mysql_store_result(conn);
                         }
+
+                        bankID = tempBankID;
+
                         b.MainMenu();
                     }  
                 }
@@ -309,6 +313,11 @@ void UserDB::DatabaseOption(int option)
 int UserDB::PassBankID(int ID)
 {
     return bankID;
+}
+
+void UserDB::PassABankID(int &ID)
+{
+    ID = bankID;
 }
 
 int UserDB::PassMoney(int mon)

@@ -15,6 +15,7 @@ public:
 	int PassTBankID(int Tid);
 	void PassTCash(int &Tcash);
 	void Statement(int pick);
+	void ReturnBankID(int& ID);
 };
 
 #endif
