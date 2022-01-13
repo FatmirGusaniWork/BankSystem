@@ -166,7 +166,7 @@ void UserDB::DatabaseOption(int option)
         if (conn)
         {
             stringstream ss;
-            ss << "UPDATE bankuser.details SET money = " << b.PassBalance(money) << " WHERE id = " << testBankID;
+            ss << "UPDATE bankuser.details SET money = " << b.PassBalance(money) << " WHERE id = " << tempBankID;
 
             string query = ss.str();
             const char* q = query.c_str();
@@ -194,8 +194,10 @@ void UserDB::DatabaseOption(int option)
             char* val2;
             char* val3;
             char* val4;
+
             stringstream ss;
             ss << "SELECT * FROM bankuser.details";
+
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
@@ -222,6 +224,7 @@ void UserDB::DatabaseOption(int option)
                     s2 >> rowValue2;
 
                     bankID = atoi(val0);
+                    tempBankID = bankID;
                     testBankID = bankID;
 
                     //test = bankID;
@@ -229,6 +232,8 @@ void UserDB::DatabaseOption(int option)
                     money = atoi(val4);
                     //testMoney = money;
                     b.PassBalanceDetails(money);
+
+                    //bankID = tempBankID;
 
                     if (rowValue1 == f.PassValueOption(checkfname, 3) && rowValue2 == f.PassValueOption(checklname, 4) && f.PassCheckBankPin(checkbpin) == rowValue3)
                     {
@@ -317,7 +322,7 @@ int UserDB::PassBankID(int ID)
 
 void UserDB::PassABankID(int &ID)
 {
-    ID = bankID;
+    ID = tempBankID;
 }
 
 int UserDB::PassMoney(int mon)

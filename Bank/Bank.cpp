@@ -8,6 +8,7 @@ using namespace std;
 #include <iostream>
 #include <fstream>  
 
+
 #include <direct.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -33,6 +34,7 @@ void Bank::MainMenu()
 {
 	Function f;
 	UserDB db;
+
 	system("CLS");
 	cout << "**************************************************" << endl;
 	f.PrintName();
@@ -70,7 +72,7 @@ void Bank::MainMenu()
 
 			db.DatabaseOption(4);
 			cout << "New Balance : " << balance << endl;
-			Statement(1);
+			Statement(1,1);
 			PassBalance(balance);
 
 
@@ -107,16 +109,20 @@ void Bank::MainMenu()
 		cout << "Doposit Successfully" << endl;
 		db.DatabaseOption(4);
 		cout << "New Balance : " << balance << endl;
-		Statement(2);
+		Statement(1,2);
 		PassBalance(balance);
-
-
 		Sleep(3000);
 		system("CLS");
 		MainMenu();
 		break;
 
 	case 3:
+		system("CLS");
+		
+		Statement(2, 4);
+		system("pause");
+
+		MainMenu();
 		break;
 
 	case 4:
@@ -135,7 +141,7 @@ void Bank::MainMenu()
 		{
 			balance -= transferCash;
 			db.DatabaseOption(4);
-			Statement(3);
+			Statement(1,3);
 			db.DatabaseOption(6);
 			
 		}
@@ -276,89 +282,84 @@ void Bank::PrintTime()
 
 }
 
-void Bank::Statement(int pick)
+void Bank::Statement(int readOrwrite ,int pick)
 {
-	UserDB db;
-	
-	
-	//std::to_string(BankID).c_str();
-
-	//_mkdir("C://Users//Fatmir//source//repos//FatmirGusaniWork//Bank//BankID");
-	const char* path = "C://Users//Fatmir//source//repos//FatmirGusaniWork//Bank//BankID//T1.txt";
-	ofstream file(std::to_string(BankID).c_str(), ios::app);
-	
-	
-
-	if (file.is_open())
+	if (readOrwrite == 1)
 	{
-		if (pick == 1)
+		const char* path = "C://Users//Fatmir//source//repos//FatmirGusaniWork//Bank//BankID//";
+
+		_chdir(path);
+
+		//ofstream object("C://Users//Fatmir//source//repos//FatmirGusaniWork//Bank//BankID");
+		ofstream file(to_string(BankID).c_str(), ios::app);
+
+		//ofstream file(path, ios::app);
+		if (file.is_open())
 		{
-			file << "\n**************************************************";
-			file << "WithDraw";
-			file << "**************************************************";
-			file << "\nBankID : " << db.PassBankID(getBankID);
-			file << "\nCurrent Balance : " << balance;
-			file << "\nAmount : " << amount;
-			file << "\nOld Balance : " << balance + amount;
-			file << "\n**************************************************";
-			file << "WithDraw";
-			file << "**************************************************\n";
+			if (pick == 1)
+			{
+				file << "\n**************************************************";
+				file << "WithDraw";
+				file << "**************************************************";
+				file << "\nBankID : " << BankID;
+				file << "\nCurrent Balance : " << balance;
+				file << "\nAmount : " << amount;
+				file << "\nOld Balance : " << balance + amount;
+				file << "\n**************************************************";
+				file << "WithDraw";
+				file << "**************************************************\n";
 
-			file.close();
-		}
+				file.close();
+			}
 
-		if (pick == 2)
-		{
-			file << "\n**************************************************";
-			file << "Deposit";
-			file << "**************************************************";
-			file << "\nBankID : " << db.PassBankID(getBankID);
-			file << "\nCurrent Balance : " << balance;
-			file << "\nAmount : " << amount;
-			file << "\nOld Balance : " << balance - amount;
-			file << "\n**************************************************";
-			file << "Deposit";
-			file << "**************************************************\n";
+			if (pick == 2)
+			{
+				file << "\n**************************************************";
+				file << "Deposit";
+				file << "**************************************************";
+				file << "\nBankID : " << BankID;
+				file << "\nCurrent Balance : " << balance;
+				file << "\nAmount : " << amount;
+				file << "\nOld Balance : " << balance - amount;
+				file << "\n**************************************************";
+				file << "Deposit";
+				file << "**************************************************\n";
 
-			file.close();
-		}
+				file.close();
+			}
 
-		if (pick == 3)
-		{
+			if (pick == 3)
+			{
+				file << "\n**************************************************";
+				file << "Transfer";
+				file << "**************************************************";
+				file << "\nBankID : " << BankID;
+				file << "\nCurrent Balance : " << balance;
+				file << "\nTransfer Amount : " << transferCash;
+				file << "\nOld Balance : " << balance + transferCash;
+				file << "\nTransfer BankID : " << transferBankID;
+				file << "\n**************************************************";
+				file << "Transfer";
+				file << "**************************************************\n";
 
-			file << "\n**************************************************";
-			file << "Transfer";
-			file << "**************************************************";
-			file << "\nBankID : " << BankID;
-			file << "\nCurrent Balance : " << balance;
-			file << "\nTransfer Amount : " << transferCash;
-			file << "\nOld Balance : " << balance + transferCash;
-			file << "\nTransfer BankID : " << transferBankID;
-			file << "\n**************************************************";
-			file << "Transfer";
-			file << "**************************************************\n";
-
-			file.close();
+				file.close();
+			}
 		}
 	}
-
-
-	/*
-	if (pick == 4)
+	if (readOrwrite == 2)
 	{
-		file << "\n**************************************************";
-		file << "Transfer";
-		file << "**************************************************";
-		file << "\nBankID : " << db.PassBankID(getBankID);
-		file << "\nCurrent Balance : " << balance;
-		file << "\nTransfer Amount : " << transferCash;
-		file << "\nOld Balance : " << balance - amount;
-		file << "\nTransfer BankID : " << transferBankID;
-		file << "\n**************************************************";
-		file << "Transfer";
-		file << "**************************************************\n";
-		file.close();
-	}
-	*/
+		if (pick == 4)
+		{
+			string fileContext;
 
+			ifstream MyReadFile(to_string(BankID).c_str(), ios::app);
+
+			while (getline(MyReadFile, fileContext)) {
+				
+				cout << fileContext << endl;
+			}
+			MyReadFile.close();
+		}
+		
+	}
 }
