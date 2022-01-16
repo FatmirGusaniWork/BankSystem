@@ -10,6 +10,7 @@ public:
 	int PassBankID(int ID);
 	int PassMoney(int mon);
 	void PassABankID(int& ID);
+	int Refund(int tBankIDExist);
 };
 
 #endif

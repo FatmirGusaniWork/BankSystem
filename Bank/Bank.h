@@ -17,6 +17,7 @@ public:
 	void Statement(int readOrwrite, int pick);
 	void ReturnBankID(int& ID);
 	void PrintTime();
+	void CheckRefund();
 
 };
 

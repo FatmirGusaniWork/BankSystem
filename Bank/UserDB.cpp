@@ -15,6 +15,7 @@ using namespace std;
 #include "Function.h"
 #include "Bank.h"
 
+int TBankIDExist;
 
 string checkfname;
 string checklname;
@@ -253,6 +254,7 @@ void UserDB::DatabaseOption(int option)
         /////////////// TRANSFER ///////////////
         if (conn)
         {
+            
             int PTbankID;
             int PTcash;
 
@@ -298,11 +300,22 @@ void UserDB::DatabaseOption(int option)
                             res = mysql_store_result(conn);
                         }
 
-                        bankID = tempBankID;
+                        cout << "Transfer Completed...\nReturning to Main Menu...";
+                        Sleep(3000);
 
+                        bankID = tempBankID;
+                        TBankIDExist = 1;
+                     
                         b.MainMenu();
-                    }  
+                    }
+                    
                 }
+
+                cout << "Error, Transfer Failed...\nBank ID Entered Doesn't Exist...\nReturning to Main Menu...";
+                Sleep(2000);
+                TBankIDExist = 2;
+                b.MainMenu();
+
             }
         }
 
@@ -320,7 +333,7 @@ int UserDB::PassBankID(int ID)
     return bankID;
 }
 
-void UserDB::PassABankID(int &ID)
+void UserDB::PassABankID(int& ID)
 {
     ID = tempBankID;
 }
@@ -328,4 +341,9 @@ void UserDB::PassABankID(int &ID)
 int UserDB::PassMoney(int mon)
 {
     return money;
+}
+
+int UserDB::Refund(int exist)
+{
+    return TBankIDExist;
 }

@@ -29,6 +29,7 @@ int transferBankID;
 int transferCash;
 
 int PO;
+int checkExist;
 
 void Bank::MainMenu()
 {
@@ -39,12 +40,16 @@ void Bank::MainMenu()
 	cout << "**************************************************" << endl;
 	f.PrintName();
 	cout << "**************************************************" << endl;
+
+	CheckRefund();
 	db.PassABankID(BankID);
+
 	cout << "Bank ID Number : " << BankID << endl;
 	cout << "Balance : " << balance << endl;
 	cout << "Please pick one of the options available" << endl;
 	cout << "1 : Withdrawal. \n2 : Deposit.\n3 : Statement.\n4 : Send Money\n5 : Sign Out\n" << endl;
 	cout << "Option : ";
+
 
 	cin >> option;
 
@@ -139,10 +144,12 @@ void Bank::MainMenu()
 
 		if (balance >= transferCash && amount >= 0)
 		{
-			balance -= transferCash;
+			//balance -= transferCash;
 			db.DatabaseOption(4);
 			Statement(1,3);
+			balance -= transferCash;
 			db.DatabaseOption(6);
+			
 			
 		}
 		else
@@ -280,6 +287,16 @@ void Bank::ReturnBankID(int& ID)
 void Bank::PrintTime()
 {
 
+}
+
+void Bank::CheckRefund()
+{
+	UserDB db;
+
+	if (db.Refund(checkExist) == 2)
+	{
+		balance += transferCash;
+	}
 }
 
 void Bank::Statement(int readOrwrite ,int pick)
