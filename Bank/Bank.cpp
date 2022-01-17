@@ -8,6 +8,7 @@ using namespace std;
 #include <iostream>
 #include <fstream>  
 
+#include <ctime>
 
 #include <direct.h>
 #include <stdlib.h>
@@ -67,7 +68,7 @@ void Bank::MainMenu()
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Invalid Input" << endl;
-			cout << "Enter withdraw amount : " << endl;
+			cout << "Enter withdraw amount : ";
 		}
 
 		if (balance >= amount && amount > 0)
@@ -79,8 +80,6 @@ void Bank::MainMenu()
 			cout << "New Balance : " << balance << endl;
 			Statement(1,1);
 			PassBalance(balance);
-
-
 		}
 		else
 		{
@@ -99,14 +98,14 @@ void Bank::MainMenu()
 		cout << "**************************************************" << endl;
 		cout << "                      Deposit                     " << endl;
 		cout << "**************************************************" << endl;
-		cout << "Enter Deposit Amount : " << endl;
+		cout << "Enter Deposit Amount : ";
 
 		while (!(cin >> amount))
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Invalid Input" << endl;
-			cout << "Enter Deposit Amount : " << endl;
+			cout << "Enter Deposit Amount : ";
 		}
 
 		balance += amount;
@@ -284,10 +283,6 @@ void Bank::ReturnBankID(int& ID)
 	ID = BankID;
 }
 
-void Bank::PrintTime()
-{
-
-}
 
 void Bank::CheckRefund()
 {
@@ -310,44 +305,50 @@ void Bank::Statement(int readOrwrite ,int pick)
 		//ofstream object("C://Users//Fatmir//source//repos//FatmirGusaniWork//Bank//BankID");
 		ofstream file(to_string(BankID).c_str(), ios::app);
 
+		time_t currentTime = time(0);
+		char* dataTime = ctime(&currentTime);
+
+
 		//ofstream file(path, ios::app);
 		if (file.is_open())
 		{
 			if (pick == 1)
 			{
-				file << "\n**************************************************";
+				file << "**************************************************";
 				file << "WithDraw";
 				file << "**************************************************";
 				file << "\nBankID : " << BankID;
 				file << "\nCurrent Balance : " << balance;
 				file << "\nAmount : " << amount;
 				file << "\nOld Balance : " << balance + amount;
-				file << "\n**************************************************";
+				file << "\nDate And Time : " << dataTime;
+				file << "**************************************************";
 				file << "WithDraw";
-				file << "**************************************************\n";
+				file << "**************************************************\n\n";
 
 				file.close();
 			}
 
 			if (pick == 2)
 			{
-				file << "\n**************************************************";
+				file << "**************************************************";
 				file << "Deposit";
 				file << "**************************************************";
 				file << "\nBankID : " << BankID;
 				file << "\nCurrent Balance : " << balance;
 				file << "\nAmount : " << amount;
 				file << "\nOld Balance : " << balance - amount;
-				file << "\n**************************************************";
+				file << "\nDate And Time : " << dataTime;
+				file << "**************************************************";
 				file << "Deposit";
-				file << "**************************************************\n";
+				file << "**************************************************\n\n";
 
 				file.close();
 			}
 
 			if (pick == 3)
 			{
-				file << "\n**************************************************";
+				file << "**************************************************";
 				file << "Transfer";
 				file << "**************************************************";
 				file << "\nBankID : " << BankID;
@@ -355,9 +356,10 @@ void Bank::Statement(int readOrwrite ,int pick)
 				file << "\nTransfer Amount : " << transferCash;
 				file << "\nOld Balance : " << balance + transferCash;
 				file << "\nTransfer BankID : " << transferBankID;
-				file << "\n**************************************************";
+				file << "\nDate And Time : " << dataTime;
+				file << "**************************************************";
 				file << "Transfer";
-				file << "**************************************************\n";
+				file << "**************************************************\n\n";
 
 				file.close();
 			}

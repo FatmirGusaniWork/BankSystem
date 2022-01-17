@@ -1,11 +1,7 @@
 ﻿  Bank.cpp
-  Function.cpp
-  The contents of <filesystem> are available only with C++17 or later.
-  UserDB.cpp
   Generating code
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\Function.cpp(206): warning C4715: 'Function::PassValueOption': not all control paths return a value
-C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\Function.cpp(184): warning C4715: 'Function::EnterPin': not all control paths return a value
-  All 298 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 300 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Bank.vcxproj -> C:\Users\Fatmir\source\repos\FatmirGusaniWork\x64\Release\Bank.exe
