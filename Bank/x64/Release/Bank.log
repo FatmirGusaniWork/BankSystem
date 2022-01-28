@@ -1,7 +1,7 @@
-﻿  Bank.cpp
+﻿  BankSystem.cpp
   Generating code
-  1 of 300 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+C:\Users\Fatmir\source\repos\FatmirGusaniWork\Bank\LoginSystem.cpp(157): warning C4715: 'LoginSystem::CheckPinCode': not all control paths return a value
+  All 301 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Bank.vcxproj -> C:\Users\Fatmir\source\repos\FatmirGusaniWork\x64\Release\Bank.exe
