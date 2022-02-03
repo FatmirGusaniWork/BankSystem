@@ -4,9 +4,9 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
-
 class FileSystem {
 public:
+	// Main Functions //
 	void Statement(int write);
 	void ReadStatement();
 	void SearchStatement();

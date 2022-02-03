@@ -6,6 +6,7 @@
 
 class MainBank {
 public:
+	// Main Function //
 	void MainMenu();
 };
 

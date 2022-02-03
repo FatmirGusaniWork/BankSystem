@@ -6,11 +6,13 @@
 
 class DatabaseSystem {
 public:
+	// Main Function //
 	void DatabaseOption(int option);
+
+	// Return Value // Pass Value //
+	int Refund(int exist);
 	int PassBankID(int ID);
 	void BankIDValue(int& IDv);
-	//int PassMoney(int pMoney);
-	int Refund(int exist);
 };
 
 #endif

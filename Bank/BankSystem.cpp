@@ -10,7 +10,7 @@ using namespace std;
 #include <algorithm>
 #include <sstream>
 
-// Person Headers //
+// Personal Headers //
 #include "BankSystem.h"
 #include "MainBank.h"
 #include "DatabaseSystem.h"
@@ -35,7 +35,7 @@ int displayBankID;
 int transferCash;
 int transferBankID;
 
-// When the user runs the code, This is the first function that runs. //
+// When the user runs the program, This is the first function that runs. //
 // It helps the user navigate through the bank. //
 void BankSystem::StartingOption()
 {
@@ -68,10 +68,10 @@ void BankSystem::StartingOption()
 	}
 }
 
-// Thie part of the code displays the basic information to the user then signed in. //
-
+// This part of the code displays the basic information to the user then signed in. //ww
 void BankSystem::DisplayBank()
 {
+	// CheckRefund() runs to check if the user make a fail tranfer. //
 	CheckRefund();
 	dbs.BankIDValue(displayBankID);
 	system("CLS");
@@ -85,7 +85,7 @@ void BankSystem::DisplayBank()
 	cout << "Option : ";
 }
 
-// This is the basic function where the user can withdraw money from their account. //
+// This function allows the user to make withdraw from their account. //
 void BankSystem::Withdraw()
 {
 	MainBank mb;
@@ -94,7 +94,7 @@ void BankSystem::Withdraw()
 	cout << "**************************************************" << endl;
 	cout << "Enter withdraw amount : ";
 
-	// Makes sures the user enters digits as the amount. //
+	// Makes sure the user enters digits as the amount. //
 	while (!(cin >> amount))
 	{
 		cin.clear();
@@ -102,10 +102,10 @@ void BankSystem::Withdraw()
 		cout << "Invalid Input" << endl;
 		cout << "Enter withdraw amount : ";
 	}
-	// If the user withdraws money that doesn't exceed their ccurent balance. //
+	// If the user withdraws money that doesn't exceed their current balance. //
 	if (balance >= amount && amount > 0)
 	{
-		// Withdraw amount will be subtracked from the current balance. //
+		// Withdraw amount will be subtracted from the current balance. //
 		balance -= amount;
 		cout << "Withdraw Successful" << endl;
 		
@@ -124,7 +124,7 @@ void BankSystem::Withdraw()
 		cout << "Balance : " << balance << endl;
 	}
 
-	// After the withdraw is complete, user retuened to main menu. //
+	// After the withdrawal is complete, the user returns to the MainMenu. //
 	Sleep(3000);
 	system("CLS");
 	mb.MainMenu();
@@ -139,7 +139,7 @@ void BankSystem::Deposit()
 	cout << "**************************************************" << endl;
 	cout << "Enter Deposit Amount : ";
 
-	// Makes sures the user enters digits as the amount. //
+	// Makes sure the user enters digits as the amount. //
 	while (!(cin >> amount))
 	{
 		cin.clear();
@@ -156,10 +156,10 @@ void BankSystem::Deposit()
 	dbs.DatabaseOption(4);
 	cout << "New Balance : " << balance << endl;
 
-	// Deposit details recorded into the statement.
+	// Deposit details recorded into the statement. //
 	fs.Statement(2);
 
-	// After the deposit is complete, user retuened to main menu. //
+	// After the deposit is complete, the user returns to the MainMenu. //
 	Sleep(3000);
 	system("CLS");
 	mb.MainMenu();
@@ -183,7 +183,7 @@ void BankSystem::Transfer()
 	// If the transfer amount isn't greater then the current balance. //
 	if (balance >= transferCash && amount >= 0)
 	{
-		// Subtrack transfer amount from current balance.
+		// Subtract transfer amount from the current balance. //
 		balance -= transferCash;
 
 		// Update the current balance into the database. //
@@ -197,7 +197,7 @@ void BankSystem::Transfer()
 	}
 	else
 	{ 
-		// If transfer amount exceeds current balance, error will display and return the user to main menu. //
+		// If the transfer amount exceeds the current balance, an error will display and the user will return to the MainMenu. //
 		cout << "Transfor Failed...\nNot Enought Money";
 		Sleep(3000);
 		mb.MainMenu();
@@ -205,7 +205,7 @@ void BankSystem::Transfer()
 }
 
 // This function can only be accessed by entered the admin details when signing in. //
-// first name : Admin, last name : Mode, Pincode : 0. //
+// first name : "Admin", last name : "Mode", Pincode : "007007". //
 void BankSystem::AdminMode()
 {
 	int adminOption;
@@ -225,7 +225,7 @@ void BankSystem::AdminMode()
 		case 1:
 			system("CLS");
 			dbs.DatabaseOption(2);
-			system("pause");
+			system("CLS");
 			AdminMode();
 			break;
 
@@ -233,7 +233,7 @@ void BankSystem::AdminMode()
 		case 2:
 			system("CLS");
 			dbs.DatabaseOption(3);
-			Sleep(5000);
+			system("CLS");
 			AdminMode();
 			break;
 
@@ -245,10 +245,12 @@ void BankSystem::AdminMode()
 			system("CLS");
 			AdminMode();
 			break;
-		// This case allows the admin to delete a user from the database, this is the only way to delete a user from the bank.
+		// This case allows the admin to delete a user from the database, this is the only way to delete a user from the bank. // 
 		case 4:
 			system("CLS");
 			dbs.DatabaseOption(7);
+			system("pause");
+			system("CLS");
 			break;
 
 		// This case allows the Admin to go bank first display. //
@@ -267,7 +269,7 @@ void BankSystem::AdminMode()
 	}
 }
 
-// After the user enters the first/last name and pincode this functions runs. //
+// After the user enters the first/last name and Pincode this function runs. //
 void BankSystem::RegisterBalance()
 {
 	DatabaseSystem dbs;
@@ -280,7 +282,7 @@ void BankSystem::RegisterBalance()
 	cout << "*************************************************************" << endl;
 	cout << "Enter Deposit Amount : ";
 
-	// Makes sures the user enters digits as the balance. //
+	// Makes sure the user enters digits as the balance. //
 	while (!(cin >> balance))
 	{
 		cin.clear();
@@ -295,10 +297,10 @@ void BankSystem::RegisterBalance()
 		bs.StartingOption();
 	}
 
-	// User has to deposit an mimimum of 5 euro and a maximum of 1000 euro.
+	// User has to deposit a minimum of 5 euro and a maximum of 1000 euro. //
 	else if (balance >= 5 && balance <= 1000)
 	{
-		// Once deposit is entered, the account wil created in the database and the user will be send to the main menu. //
+		// Once the deposit is entered, the account will be created in the database and the user will be sent to the MainMenu. //
 		dbs.DatabaseOption(1);
 		cout << "Account Created Successful ..." << endl;
 		Sleep(3000);
@@ -307,7 +309,7 @@ void BankSystem::RegisterBalance()
 	}
 	else
 	{
-		// If the user doesnt depsoit the right amount, an error will be displayed and the user can try again. //
+		// If the user doesn't deposit the right amount, an error will be displayed and the user can try again. //
 		cout << "Error, not within the limits, try again" << endl;
 		Sleep(3000);
 		system("CLS");
@@ -315,21 +317,22 @@ void BankSystem::RegisterBalance()
 	}
 }
 
-// This function is called when the user enters the main manu. //
-// If the user enters an bankId that doesnt exist, this function returns the transfer amount. //
+// This function is called when the user enters the MainMenu. //
+// If the user enters a bankID that doesn't exist, this function returns the transfer amount. //
 void BankSystem::CheckRefund()
 {
 	DatabaseSystem dbs;
 	int checkExist;
-
+	
+	// If checkExist equals '2', the money will be refunded. //
 	if (dbs.Refund(checkExist) == 2)
 	{
 		balance += transferCash;
 	}
 }
 
-
 // Passing Variables // Returning Variables //
+
 void BankSystem::BalanceValue(int& bal)
 {
 	balance = bal;

@@ -4,17 +4,15 @@
 #ifndef LOGINSYSTEM_H
 #define LOGINSYSTEM_H
 
-
 class LoginSystem {
 public:
-
-	// Main Functions
+	// Main Functions //
 	void SignInCode();
 	void SignUpCode();
 	int CheckPinCode(string checkPin, int functionOption);
 	void PrintName();
 
-	// Return Value
+	// Return Value //
 	string PassFirstName(string rFirstName);
 	string PassLastName(string rLastName);
 	string PassCheckFirstName(string rCheckFirstName);

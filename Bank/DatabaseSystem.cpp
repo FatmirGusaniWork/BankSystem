@@ -32,8 +32,8 @@ int bMoney;
 int tempBankID;
 int TBankIDExist;
 
-// The code below is the main fuction of the databae. //
-// The cases act as functoin calls with each case per of the code performing a task the user requested.
+// The code below is the main function of the database. //
+// The cases act as function calls with each case performing a task the user requested. //
 void DatabaseSystem::DatabaseOption(int option)
 {
     BankSystem bs;
@@ -67,15 +67,19 @@ void DatabaseSystem::DatabaseOption(int option)
         if (conn)
         {
             stringstream ss;
-            // INSERT is a key word that takes the data and enters it into the database.
+            // "INSERT" is a keyword that takes the data and enters it into the database. //
+            // The requested information is stored in the database. //
             ss << "INSERT INTO bankuser.details (id, firstname, lastname, bankpin, money) values ('" << bankID << "','" << ls.PassFirstName(fName) << "','" << ls.PassLastName(lName) << " ','" << ls.PassBankPin(bPin) << " ','" << bs.PassBalance(bMoney) << "')";
 
+            // TempBankID gets the current bankID. //
             tempBankID = bankID;
 
+            // Runs SS into the mysql. //
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
 
+            // If the information is entered correlty. //
             if (qstate == 0)
             {
                 cout << "Record inserted successfully ..." << endl;
@@ -85,25 +89,29 @@ void DatabaseSystem::DatabaseOption(int option)
                 cout << "Error, data not inserted..." << endl;
             }
         }
+        // If there is an error connecting to the database. //
         else
         {
             cout << " Connection failure" << endl;
         }
+
         break;
 
     case 2:
         /////////////// VIEW ///////////////
         // This case can only be accessed with Admin Mode. //
-        // It allows the Admin to view all the user data in the Bank database. //
+        // It allows the Admin to view all the user's data in the database. //
         // The code will also specify the type of data. // 
         if (conn)
         {
+            // "SELECT" is a keyword that select data from the database. // //
             qstate = mysql_query(conn, "SELECT * FROM bankuser.details");
 
             if (!qstate)
             {
                 res = mysql_store_result(conn);
 
+                // Fetches the data from the database and prints data. //
                 while (row = mysql_fetch_row(res))
                 {
                     cout << endl;
@@ -114,8 +122,8 @@ void DatabaseSystem::DatabaseOption(int option)
                     cout << "Bank Pin: " << row[3] << endl;
                     cout << "Money " << row[4] << endl;
                     cout << "********************" << endl;
-                    
                 }
+                cout << "" << endl;
                 system("pause");
             }
         }
@@ -124,6 +132,7 @@ void DatabaseSystem::DatabaseOption(int option)
         {
             cout << " Connection failure" << endl;
         }
+
         break;
 
     case 3:
@@ -136,12 +145,15 @@ void DatabaseSystem::DatabaseOption(int option)
         {
             string searchName;
 
+            // Admin is asked to enter a first name. //
             cout << "Search First Name : ";
             cin >> searchName;
 
+            // Selects all the data with the first name that matches what the admin entered. //
             stringstream ss;
             ss << "SELECT * FROM bankuser.details WHERE firstname = '" << searchName << "'";
 
+            // Runs SS into the mysql. //
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
@@ -150,6 +162,7 @@ void DatabaseSystem::DatabaseOption(int option)
             {
                 res = mysql_store_result(conn);
 
+                // Fetches the data from the database with the same first name as the entered one and prints data. //
                 while (row = mysql_fetch_row(res))
                 {
                     cout << endl;
@@ -159,10 +172,10 @@ void DatabaseSystem::DatabaseOption(int option)
                     cout << "Bank Pin: " << row[3] << endl;
                     cout << "Money " << row[4] << endl;
                 }
+                cout << "" << endl;
                 system("pause");
             }
         }
-
         else
         {
             cout << " Connection failure" << endl;
@@ -173,15 +186,16 @@ void DatabaseSystem::DatabaseOption(int option)
     case 4:
         /////////////// UPDATE ///////////////
         // This case handles all the changes a user makes to their balance. //
-        // This case is called when the user withdraw(), depost(), transfers() money from their account.
+        // This case is called when the user withdraw(), deposit(), transfers() money from their account.
         if (conn)
         {
             stringstream ss;
 
-            // UPDATE is a key word that updates a specify data to a specify bankID. //
-            // In this part of the code, its updating money to a specify user. //
+            // "UPDATE" is a key word that updates a specify data to a specify bankID. //
+            // In this part of the code, its updating money to a specify BankID. //
             ss << "UPDATE bankuser.details SET money = " << bs.PassBalance(bMoney) << " WHERE id = " << tempBankID;
 
+            // Runs SS into the mysql. //
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
@@ -191,7 +205,6 @@ void DatabaseSystem::DatabaseOption(int option)
                 res = mysql_store_result(conn);
             }
         }
-
         else
         {
             cout << " Connection failure" << endl;
@@ -220,9 +233,11 @@ void DatabaseSystem::DatabaseOption(int option)
             string checkLName;
             int checkBPin;
 
+            // Selects all the data in the database. //
             stringstream ss;
             ss << "SELECT * FROM bankuser.details";
 
+            // Runs SS into the mysql. //
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
@@ -240,35 +255,43 @@ void DatabaseSystem::DatabaseOption(int option)
                     bankPinV = row[3];
                     moneyV = row[4];
 
-                    /// Convert first name char to string //
+                    /// Convert first name char to string. //
                     stringstream s1;
                     s1 << firstNameV;
                     s1 >> fnRowV;
 
-                    // Convert last name char to string //
+                    // Convert last name char to string. //
                     stringstream s2;
                     s2 << lastNameV;
                     s2 >> lnRowV;
 
-                    // converts char to int
+                    // Converts bankIDchar to int. //
                     bankID = atoi(idV);
                     tempBankID = bankID;
 
-                    // converts char to int
+                    // Converts bank pin char to int. //
                     bPinRowV = atoi(bankPinV);
                     bMoney = atoi(moneyV);
 
+                    // Sends money value to Bank System. //
                     bs.BalanceValue(bMoney);
 
-                    // If a row natchs the data entered by the user, it allows the user to sign in and head to the main menu.
+                    // If a row matches the data entered by the user, it allows the user to sign in and head to the main menu.
                     if (fnRowV == ls.PassCheckFirstName(checkFName) && lnRowV == ls.PassCheckLastName(checkLName) && bPinRowV == ls.PassCheckBankPin(checkBPin))
                     {
+                        // Sign in successfully, sends user to MainMenu(). //
                         mb.MainMenu();
+                    }
+                    // If the user Enters "Admin" for the first name, "Mode" for last name, and "007007" for pin code. //
+                    else if ("Admin" == ls.PassCheckFirstName(checkFName) && "Mode" == ls.PassCheckLastName(checkLName) && 007007 == ls.PassCheckBankPin(checkBPin))
+                    {
+                        // Enters Administrator Mode. //
+                        system("CLS");
+                        bs.AdminMode();
                     }
                 }
             }
         }
-
         else
         {
             cout << " Connection failure" << endl;
@@ -277,8 +300,8 @@ void DatabaseSystem::DatabaseOption(int option)
 
     case 6:
         /////////////// TRANSFER ///////////////
-        // This case allow the user to transfer money from one account to another. //
-        // To perform a transfer, BankId and the amount of money is reqired. //
+        // This case allows the user to transfer money from one account to another. //
+        // To perform a transfer, BankId and the amount of money is required. //
         if (conn)
         {
             // Pass Transfer BankID, Pass Transfer Cash //
@@ -288,11 +311,14 @@ void DatabaseSystem::DatabaseOption(int option)
             char* idV;
             char* moneyV;
 
+            // Sends BankID value to Bank System. //
             bs.BankIDValue(tempBankID);
 
+            // Runs SS into the mysql. //
             stringstream ss;
             ss << "SELECT * FROM bankuser.details";
 
+            // Runs SS into the mysql. //
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
@@ -303,28 +329,35 @@ void DatabaseSystem::DatabaseOption(int option)
 
                 while (row = mysql_fetch_row(res))
                 {
+                    // Saves the 1st row to bank Id. //
                     idV = row[0];
+
+                    // Saves the 5th row to money. //
                     moneyV = row[4];
 
+                    // Saves 1st row to bankID. //
                     bankID = atoi(idV);
 
                     int tempmoney;
+
+                    // Saves 5th row to money. //
                     tempmoney = atoi(moneyV);
 
-                    // Gets the transfered BankID
+                    // Gets the transfer BankID. //
                     bs.TBankIDValue(PTbankID);
 
-                    // if the transfer bankid matchs a bankid in the databse. //
+                    // if the transfer bankID matches a bankID in the database. //
                     if (PTbankID == bankID)
                     {
                         // Gets transfer amount and adds its the transferID balance. //
                         bs.TBalanceValue(PTcash);
                         tempmoney += PTcash;
 
-                        // Updates the new balance of the transfers account.//
+                        // Updates the new balance of the transfers account. //
                         stringstream ss;
                         ss << "UPDATE bankuser.details SET money = '" << tempmoney << "' WHERE id = '" << PTbankID << "'";
 
+                        // Runs SS into the mysql. //
                         string query = ss.str();
                         const char* q = query.c_str();
                         qstate = mysql_query(conn, q);
@@ -337,6 +370,7 @@ void DatabaseSystem::DatabaseOption(int option)
                         cout << "Transfer Completed...\nReturning to Main Menu...";
                         Sleep(3000);
 
+                        // TBankIDExist = 2, this tells the code that the user compeleted the transfer. //
                         bankID = tempBankID;
                         TBankIDExist = 1;
                         mb.MainMenu();
@@ -344,13 +378,13 @@ void DatabaseSystem::DatabaseOption(int option)
                 }
                 // If the transfer bankID doesn't match with the databse. returns to the main menu. //
                 cout << "Error, Transfer Failed...\nBank ID Entered Doesn't Exist...\nReturning to Main Menu...";
-                Sleep(2000);
+                Sleep(3000);
 
+                // TBankIDExist = 2, this tells the code that the user failed to transfer money because BankID doesn't exist. //
                 TBankIDExist = 2;
                 mb.MainMenu();
             }
         }
-
         else
         {
             cout << " Connection failure" << endl;
@@ -361,6 +395,9 @@ void DatabaseSystem::DatabaseOption(int option)
 
     case 7:
         /////////////// DELETE USER ///////////////
+        // This case can only be accessed by the admin. //
+        // Allows the user to delete an account from the database. //
+        // Reqired information is bankID, first name, last name, pincode, current money. //
         if (conn)
         {
             char* idV;
@@ -372,16 +409,18 @@ void DatabaseSystem::DatabaseOption(int option)
             string firstNameRow;
             string lastNameRow;
 
+            // Deleted information // 
             int deleteBankID;
             string deleteFirstName;
             string deleteLastName;
             int deletePinCode;
             int deleteMoney;
 
-            //b.ReturnBankID(tempBankID);
+            // Runs SS into the mysql. //
             stringstream ss;
             ss << "SELECT * FROM bankuser.details";
 
+            // Runs SS into the mysql. //
             string query = ss.str();
             const char* q = query.c_str();
             qstate = mysql_query(conn, q);
@@ -390,6 +429,7 @@ void DatabaseSystem::DatabaseOption(int option)
             cout << "                  Delete Account                   " << endl;
             cout << "***************************************************" << endl;
 
+            // Asks the Admin for information. //
             cout << "Enter BankID : ";
             cin >> deleteBankID;
 
@@ -417,26 +457,29 @@ void DatabaseSystem::DatabaseOption(int option)
                     PinV = row[3];
                     moneyV = row[4];
 
-                    // Convert first name char to string //
+                    // Convert first name char to string. //
                     stringstream s1;
                     s1 << firstNameV;
                     s1 >> firstNameRow;
 
-                    // Convert last name char to string //
+                    // Convert last name char to string. //
                     stringstream s2;
                     s2 << lastNameV;
                     s2 >> lastNameRow;
                     
-                    // Convert chat to int //
+                    // Convert char to int. //
                     bankID = atoi(idV);
                     bPin = atoi(PinV);
                     bMoney = atoi(moneyV);
 
+                    // If the entered informaton matches with the data in the database. //
                     if (deleteBankID == bankID && deleteFirstName == firstNameRow && deleteLastName == lastNameRow && deletePinCode == bPin && deleteMoney == bMoney)
                     {
+                        // The account will be deleted using the BankID. //
                         stringstream ss;
                         ss << "DELETE FROM bankuser.details WHERE id = '" << deleteBankID << "'";
 
+                        // Runs SS into the mysql. //
                         string query = ss.str();
                         const char* q = query.c_str();
                         qstate = mysql_query(conn, q);
@@ -454,7 +497,6 @@ void DatabaseSystem::DatabaseOption(int option)
                 cout << "Error, Account Failed to Delete...\nReturning to Administrator Mode...";
             }
         }
-
         else
         {
             cout << " Connection failure" << endl;
@@ -465,6 +507,11 @@ void DatabaseSystem::DatabaseOption(int option)
 
 // Passing Variables //
 
+int DatabaseSystem::Refund(int exist)
+{
+    return TBankIDExist;
+}
+
 int DatabaseSystem::PassBankID(int ID)
 {
     return bankID;
@@ -473,9 +520,4 @@ int DatabaseSystem::PassBankID(int ID)
 void DatabaseSystem::BankIDValue(int& IDv)
 {
     IDv = tempBankID;
-}
-
-int DatabaseSystem::Refund(int exist)
-{
-    return TBankIDExist;
 }

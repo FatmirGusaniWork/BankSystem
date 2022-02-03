@@ -1,7 +1,6 @@
 //Name : Fatmir Gusani // 
 //Date : 20.06.2021 - 27.01.2022 //
-// This file is responeable for the Signing Up and Signing In part of the Bank system. //
-
+// This file is responsible for the Signing Up and Signing In part of the bank system. //
 
 using namespace std;
 
@@ -12,7 +11,7 @@ using namespace std;
 #include <algorithm>
 #include <sstream>
 
-// Person Headers //
+// Personal Headers //
 #include "BankSystem.h"
 #include "MainBank.h"
 #include "DatabaseSystem.h"
@@ -38,9 +37,6 @@ string checkNumber;
 int PrintOption;
 
 // This function allows the user to sign up to the bank system. //
-// It asks the the user basic information that is added to the database. //
-// Before the account is created, the user has to add a minimum balance. //
-// This is done using the RegisterBalance(). //
 void LoginSystem::SignUpCode()
 {
 	BankSystem bs;
@@ -49,14 +45,17 @@ void LoginSystem::SignUpCode()
 	cout << "*********************************************" << endl;
 	cout << "********************Sign Up******************" << endl;
 
+	// Requests basic information from the user. //
 	cout << "Enter First Name : ";
 	cin >> firstName;
 
 	cout << "Enter Last Name : ";
 	cin >> lastName;
 
+	// Sends a '1' to CheckPinCode(), this tells the code that we are checking the bank pin for SignUpCode(). //
 	CheckPinCode(checkNumber, 1);
 
+	// After the user enters their bank pin and it passes all the requirements. //
 	cout << "Sign Up completed, BANK PIN : " << bankPin << endl;
 
 	cout << "*********************************************" << endl;
@@ -64,22 +63,27 @@ void LoginSystem::SignUpCode()
 
 	Sleep(3000);
 	system("CLS");
+
+	// The user asked to make a deposit. //
 	bs.RegisterBalance();
 }
 
-// This code of the code allows the user to sign into their accounts or enter Administrator Mode. //
-// Asks the user to enter basic information and uses the details to check if it matchs with the database in the DatabaseOption() //
-// If the users detail doesn't match the database, it allows the user to try again, sign up or return to the starting screen. // 
+// This code allows the user to sign into their accounts. //
+// Asks the user to enter basic information and uses the details to check if it matches with the database in the DatabaseOption() //
+// If the user detail doesn't match the database, it allows the user to try again, sign up or return to the starting screen. // 
 void LoginSystem::SignInCode()
 {
 	BankSystem bs;
 	DatabaseSystem dbs;
 
-	PrintOption = 2;
 	int tryAgain;
+
+	PrintOption = 2;
+
 	cout << "*********************************************" << endl;
 	cout << "********************Sign In******************" << endl;
 
+	// Asks the user for basic information that will be compared to the database. //
 	cout << "Enter First Name : ";
 	cin >> checkFirstName;
 
@@ -88,48 +92,47 @@ void LoginSystem::SignInCode()
 
 	CheckPinCode(checkNumber, 2);
 
+	// Entered information will be used in DatabaseOption() [case 5]. //
 	dbs.DatabaseOption(5);
 
-	if (checkFirstName == "Admin" && checkLastName == "Mode" && checkBankPin == 0)
-	{
-		system("CLS");
-		bs.AdminMode();
-	}
-	else
-	{
-		system("CLS");
-		cout << "SIGN IN FAILED, Try Again" << endl;
+	// If the entered information doesn't match any user in the database. //
+	// An error will occur, the user will have a few options to pick from. //
+	system("CLS");
+	cout << "SIGN IN FAILED, Try Again" << endl;
 
-		cout << "1 : Try Again\n2 : Sign Up\n3 : EXIT" << endl;
-		cin >> tryAgain;
-		switch (tryAgain)
-		{
-		case 1:
-			system("CLS");
-			SignInCode();
-			break;
-		case 2:
-			system("CLS");
-			SignUpCode();
-			break;
-		case 3:
-			system("CLS");
-			bs.StartingOption();
-			break;
-		default:
-			cout << "Wrong Entry" << endl;
-		}
+	cout << "1 : Try Again\n2 : Sign Up\n3 : EXIT" << endl;
+	cin >> tryAgain;
+	switch (tryAgain)
+	{
+	case 1:
+		// The user can try again. //
+		system("CLS");
+		SignInCode();
+		break;
+	case 2:
+		// Sign up if the user doesn't have an account. //
+		system("CLS");
+		SignUpCode();
+		break;
+	case 3:
+		// Can go back to the starting screen. //
+		system("CLS");
+		bs.StartingOption();
+		break;
+	default:
+		cout << "Wrong Entry" << endl;
 	}
 
 	cout << "*********************************************" << endl;
 	cout << "********************Sign In******************" << endl;
 }
 
-// The Code Below checks if the user entered 6 digits pin code. //
-// I added some error checking to see if the user entered number or letters and to make sure there is 6 entery. //
+// The Code Below checks if the user entered a six digits pin. //
+// It also checks if the entries are numbers or letters. //
 // This code is used to check the bank pin code for SignUp() and SignIn(). //
 int LoginSystem::CheckPinCode(string checkPin, int functionOption)
 {
+	// Asks the user to enter a 6 digit pin code. //
 	cout << "\nEnter Bank Pin : ";
 	cin >> checkPin;
 
@@ -137,17 +140,25 @@ int LoginSystem::CheckPinCode(string checkPin, int functionOption)
 	if (checkPin.length() == 6)
 	{
 		bool b = false;
+
+		// checks if any of the entries is a letter. //
 		if (!checkPin.empty() && std::all_of(checkPin.begin(), checkPin.end(), [](char c) {return std::isdigit(c); }))
 		{
 			b = true;
 			stringstream convert(checkPin);
+			// FunctionOption = 1 means that we are checking the pincode for SignUpCode(). //
 			if (functionOption == 1)
+				// Saves checkpin as bank pin. //
 				convert >> bankPin;
+
+			// FunctionOption = 2 means that we are checking the pincode for SignInCode(). //
 			if (functionOption == 2)
+				// Saves checkpin as check bank pin. //
 				convert >> checkBankPin;
 		}
 		else
 		{
+			// If the entry has letters. //
 			if (functionOption == 1)
 			{
 				cout << "Error, Letters Entered.\nEntered 6 digits Pin." << endl;
@@ -157,6 +168,7 @@ int LoginSystem::CheckPinCode(string checkPin, int functionOption)
 	}
 	else
 	{
+		// If the entry has more or less than 6 digits. //
 		if (functionOption == 1)
 		{
 			cout << "Error, Entered Pin is Not 6 digits." << endl;
@@ -164,18 +176,23 @@ int LoginSystem::CheckPinCode(string checkPin, int functionOption)
 		}
 	}
 	if (functionOption == 1)
+	// Returns the saved bank pin. //
 		return bankPin;
+
+	// Returns the saved check bank pin. //
 	if (functionOption == 2)
 		return checkBankPin;
 }
 
 // This code simply prints out the users first and last name. //
-// It uses the PrintOption variable to deturnment if the user is SignUp() or SignIn(). //
+// It uses the PrintOption variable to determine if the user is SignUp() or SignIn(). //
 void LoginSystem::PrintName()
 {
+	// Prints first and last name for SignUpCode(). //
 	if (PrintOption == 1)
 		cout << "                    " << firstName + " " + lastName + "\n";
 
+	// Prints first and last name for SignInCode(). //
 	if (PrintOption == 2)
 		cout << "                    " << checkFirstName + " " + checkLastName + "\n";
 }

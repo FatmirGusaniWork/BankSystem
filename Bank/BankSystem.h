@@ -6,23 +6,24 @@
 
 class BankSystem {
 public:
+	// Main Functions //
 	void StartingOption();
 	void DisplayBank();
 	void Withdraw();
 	void Deposit();
 	void Transfer();
 	void AdminMode();
+	void RegisterBalance();
+	void CheckRefund();
 
-	// Pass Value //
+	// Pass Value // Return Value //
 	void BalanceValue(int& bal);
+	void PrintBalanceValue(int& pBal);
 	void TBankIDValue(int& tID);
 	void TBalanceValue(int& tBal);
-	int PassBalance(int passBal);
 	void AmountValue(int& av);
+	int PassBalance(int passBal);
 	void BankIDValue(int& id);
-	void PrintBalanceValue(int& pBal);
-	void CheckRefund();
-	void RegisterBalance();
 };
 
 #endif
